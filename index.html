@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEVERUN TECH - Tecnología que perdura</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom Tailwind colors */
+        :root {
+            --color-primary-blue: #2962FF;
+            --color-dark-gray: #2E3440;
+            --color-accent-green: #00E676;
+            --color-accent-orange: #FF6D00;
+        }
+
+        .bg-primary-blue { background-color: var(--color-primary-blue); }
+        .text-primary-blue { color: var(--color-primary-blue); }
+        .border-primary-blue { border-color: var(--color-primary-blue); }
+
+        .bg-dark-gray { background-color: var(--color-dark-gray); }
+        .text-dark-gray { color: var(--color-dark-gray); }
+
+        .bg-accent-green { background-color: var(--color-accent-green); }
+        .text-accent-green { color: var(--color-accent-green); }
+
+        .bg-accent-orange { background-color: var(--color-accent-orange); }
+        .text-accent-orange { color: var(--color-accent-orange); }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F2F5; /* Light background for contrast */
+        }
+
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2E3440;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2962FF;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00E676;
+        }
+    </style>
+</head>
+<body class="text-dark-gray">
+    <!-- Header/Navigation -->
+    <header class="bg-dark-gray text-white p-4 shadow-lg">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary-blue rounded-md p-2">SEVERUN TECH</a>
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#hero" class="hover:text-primary-blue transition duration-300 ease-in-out">Inicio</a></li>
+                <li><a href="#services" class="hover:text-primary-blue transition duration-300 ease-in-out">Servicios</a></li>
+                <li><a href="#products" class="hover:text-primary-blue transition duration-300 ease-in-out">Productos</a></li>
+                <li><a href="#location" class="hover:text-primary-blue transition duration-300 ease-in-out">Ubicación</a></li>
+                <li><a href="#contact" class="hover:text-primary-blue transition duration-300 ease-in-out">Contacto</a></li>
+            </ul>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-gray mt-4 rounded-b-lg">
+            <ul class="flex flex-col items-center py-4 space-y-4">
+                <li><a href="#hero" class="block text-white hover:text-primary-blue transition duration-300 ease-in-out py-2" onclick="toggleMobileMenu()">Inicio</a></li>
+                <li><a href="#services" class="block text-white hover:text-primary-blue transition duration-300 ease-in-out py-2" onclick="toggleMobileMenu()">Servicios</a></li>
+                <li><a href="#products" class="block text-white hover:text-primary-blue transition duration-300 ease-in-out py-2" onclick="toggleMobileMenu()">Productos</a></li>
+                <li><a href="#location" class="block text-white hover:text-primary-blue transition duration-300 ease-in-out py-2" onclick="toggleMobileMenu()">Ubicación</a></li>
+                <li><a href="#contact" class="block text-white hover:text-primary-blue transition duration-300 ease-in-out py-2" onclick="toggleMobileMenu()">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero/Banner Principal -->
+        <section id="hero" class="relative bg-dark-gray text-white py-20 md:py-32 flex items-center justify-center overflow-hidden rounded-b-lg shadow-xl">
+            <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://placehold.co/1920x1080/2E3440/FFFFFF?text=Fondo+Tecnologico');"></div>
+            <div class="relative z-10 text-center px-4">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">SEVERUN TECH</h1>
+                <p class="text-xl md:text-3xl font-light mb-8 text-primary-blue">Tecnología que perdura</p>
+                <a href="#contact" class="inline-block bg-accent-green text-dark-gray font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transform hover:scale-105 transition duration-300 ease-in-out">
+                    ¡Contáctanos Ahora!
+                </a>
+            </div>
+        </section>
+
+        <!-- Sección de Servicios de Mantenimiento -->
+        <section id="services" class="py-16 bg-white rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-8 px-4">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-10 text-dark-gray">Nuestros Servicios de Mantenimiento</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Servicio 1: Smartphones -->
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out">
+                        <i class="fas fa-mobile-alt text-5xl text-primary-blue mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-dark-gray">Reparación de Smartphones</h3>
+                        <p class="text-gray-600">Pantallas, baterías, puertos de carga y más para todas las marcas.</p>
+                    </div>
+                    <!-- Servicio 2: Laptops -->
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out">
+                        <i class="fas fa-laptop text-5xl text-primary-blue mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-dark-gray">Mantenimiento de Laptops</h3>
+                        <p class="text-gray-600">Limpieza interna, optimización de software, cambio de componentes.</p>
+                    </div>
+                    <!-- Servicio 3: Tablets -->
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out">
+                        <i class="fas fa-tablet-alt text-5xl text-primary-blue mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-dark-gray">Arreglo de Tablets</h3>
+                        <p class="text-gray-600">Soluciones para problemas de hardware y software en tu tablet.</p>
+                    </div>
+                    <!-- Servicio 4: Consolas de Videojuegos -->
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out">
+                        <i class="fas fa-gamepad text-5xl text-primary-blue mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-dark-gray">Reparación de Consolas</h3>
+                        <p class="text-gray-600">Expertos en consolas de última generación y retro.</p>
+                    </div>
+                    <!-- Servicio 5: Impresoras -->
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out">
+                        <i class="fas fa-print text-5xl text-primary-blue mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-dark-gray">Soporte para Impresoras</h3>
+                        <p class="text-gray-600">Diagnóstico y reparación de impresoras de todas las marcas.</p>
+                    </div>
+                    <!-- Servicio 6: Redes y Conectividad -->
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-2 transition duration-300 ease-in-out">
+                        <i class="fas fa-network-wired text-5xl text-primary-blue mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-dark-gray">Redes y Conectividad</h3>
+                        <p class="text-gray-600">Configuración y solución de problemas de red para hogar y oficina.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Productos en Venta -->
+        <section id="products" class="py-16 bg-primary-blue text-white rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-8 px-4">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-10">Productos Esenciales a Precios Increíbles</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                    <!-- Producto 1 -->
+                    <div class="bg-white text-dark-gray p-5 rounded-lg shadow-md flex flex-col items-center hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/150x150/E0E0E0/2E3440?text=Cable+USB" alt="Cable USB" class="w-32 h-32 object-contain mb-4 rounded-md">
+                        <h3 class="text-lg font-semibold mb-2">Cable USB-C</h3>
+                        <p class="text-sm text-gray-600 mb-3 text-center">Cable de carga y datos de alta velocidad.</p>
+                        <span class="text-2xl font-bold text-accent-orange">$2.50</span>
+                        <button class="mt-4 bg-accent-green text-dark-gray font-semibold py-2 px-4 rounded-full hover:bg-opacity-90 transition duration-300 ease-in-out">Comprar</button>
+                    </div>
+                    <!-- Producto 2 -->
+                    <div class="bg-white text-dark-gray p-5 rounded-lg shadow-md flex flex-col items-center hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/150x150/E0E0E0/2E3440?text=Protector" alt="Protector de Pantalla" class="w-32 h-32 object-contain mb-4 rounded-md">
+                        <h3 class="text-lg font-semibold mb-2">Protector de Pantalla</h3>
+                        <p class="text-sm text-gray-600 mb-3 text-center">Cristal templado para máxima protección.</p>
+                        <span class="text-2xl font-bold text-accent-orange">$4.00</span>
+                        <button class="mt-4 bg-accent-green text-dark-gray font-semibold py-2 px-4 rounded-full hover:bg-opacity-90 transition duration-300 ease-in-out">Comprar</button>
+                    </div>
+                    <!-- Producto 3 -->
+                    <div class="bg-white text-dark-gray p-5 rounded-lg shadow-md flex flex-col items-center hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/150x150/E0E0E0/2E3440?text=Limpiador" alt="Kit de Limpieza" class="w-32 h-32 object-contain mb-4 rounded-md">
+                        <h3 class="text-lg font-semibold mb-2">Kit de Limpieza Tech</h3>
+                        <p class="text-sm text-gray-600 mb-3 text-center">Para mantener tus dispositivos impecables.</p>
+                        <span class="text-2xl font-bold text-accent-orange">$3.50</span>
+                        <button class="mt-4 bg-accent-green text-dark-gray font-semibold py-2 px-4 rounded-full hover:bg-opacity-90 transition duration-300 ease-in-out">Comprar</button>
+                    </div>
+                    <!-- Producto 4 -->
+                    <div class="bg-white text-dark-gray p-5 rounded-lg shadow-md flex flex-col items-center hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/150x150/E0E0E0/2E3440?text=Adaptador" alt="Adaptador USB" class="w-32 h-32 object-contain mb-4 rounded-md">
+                        <h3 class="text-lg font-semibold mb-2">Adaptador USB</h3>
+                        <p class="text-sm text-gray-600 mb-3 text-center">Conecta tus periféricos fácilmente.</p>
+                        <span class="text-2xl font-bold text-accent-orange">$1.80</span>
+                        <button class="mt-4 bg-accent-green text-dark-gray font-semibold py-2 px-4 rounded-full hover:bg-opacity-90 transition duration-300 ease-in-out">Comprar</button>
+                    </div>
+                    <!-- Producto 5 -->
+                    <div class="bg-white text-dark-gray p-5 rounded-lg shadow-md flex flex-col items-center hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
+                        <img src="https://placehold.co/150x150/E0E0E0/2E3440?text=Auriculares" alt="Auriculares Básicos" class="w-32 h-32 object-contain mb-4 rounded-md">
+                        <h3 class="text-lg font-semibold mb-2">Auriculares Básicos</h3>
+                        <p class="text-sm text-gray-600 mb-3 text-center">Sonido claro para el día a día.</p>
+                        <span class="text-2xl font-bold text-accent-orange">$5.00</span>
+                        <button class="mt-4 bg-accent-green text-dark-gray font-semibold py-2 px-4 rounded-full hover:bg-opacity-90 transition duration-300 ease-in-out">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Ubicación -->
+        <section id="location" class="py-16 bg-white rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-8 px-4">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-10 text-dark-gray">Encuéntranos Fácilmente</h2>
+                <p class="mb-6 text-lg text-gray-700">Estamos ubicados en el corazón de Ibarra, ¡visítanos!</p>
+                <div class="aspect-w-16 aspect-h-9 w-full rounded-lg overflow-hidden shadow-lg">
+                    <!-- Google Maps Embed - Parque Pedro Moncayo, Ibarra, Ecuador -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.789178453457!2d-78.12061098524673!3d0.3524958997089982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d53f538a0f9b69%3A0x36b0d1e5d3126848!2sParque%20Pedro%20Moncayo!5e0!3m2!1ses!2sec!4v1678901234567!5m2!1ses!2sec"
+                        width="100%"
+                        height="450"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="rounded-lg"
+                    ></iframe>
+                </div>
+                <p class="mt-6 text-xl font-semibold text-dark-gray">Dirección: Parque Pedro Moncayo, Ibarra, Ecuador</p>
+            </div>
+        </section>
+
+        <!-- Sección de Testimonios (Opcional) -->
+        <section id="testimonials" class="py-16 bg-dark-gray text-white rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-8 px-4">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-10">Lo que dicen nuestros clientes</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Testimonio 1 -->
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+                        <p class="italic text-lg mb-4">"Mi laptop quedó como nueva después del mantenimiento. ¡Excelente servicio y rapidez!"</p>
+                        <p class="font-semibold text-primary-blue">- María G., Cliente Satisfecha</p>
+                    </div>
+                    <!-- Testimonio 2 -->
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-md">
+                        <p class="italic text-lg mb-4">"Compré un protector de pantalla y la atención fue de primera. Muy recomendados."</p>
+                        <p class="font-semibold text-primary-blue">- Juan P., Comprador Feliz</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulario de Contacto -->
+        <section id="contact" class="py-16 bg-accent-green text-dark-gray rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-8 px-4">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-10">Ponte en Contacto con Nosotros</h2>
+                <p class="mb-8 text-lg">¿Tienes alguna pregunta o necesitas una cotización? ¡Envíanos un mensaje!</p>
+                <form class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-xl">
+                    <div class="mb-6">
+                        <label for="name" class="block text-left text-gray-700 text-sm font-bold mb-2">Nombre Completo</label>
+                        <input type="text" id="name" name="name" class="shadow appearance-none border rounded-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-primary-blue" placeholder="Tu Nombre" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="phone" class="block text-left text-gray-700 text-sm font-bold mb-2">Número de Teléfono</label>
+                        <input type="tel" id="phone" name="phone" class="shadow appearance-none border rounded-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-primary-blue" placeholder="Ej: 0991234567" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-left text-gray-700 text-sm font-bold mb-2">Tu Mensaje</label>
+                        <textarea id="message" name="message" rows="5" class="shadow appearance-none border rounded-md w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-primary-blue" placeholder="Describe lo que necesitas..." required></textarea>
+                    </div>
+                    <button type="submit" class="bg-primary-blue text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-opacity-90 transform hover:scale-105 transition duration-300 ease-in-out">
+                        Enviar Mensaje
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-gray text-white py-8 mt-8 rounded-t-lg shadow-lg">
+        <div class="container mx-auto text-center px-4">
+            <p class="mb-4">&copy; 2025 SEVERUN TECH. Todos los derechos reservados.</p>
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://wa.me/593991234567" target="_blank" class="text-white hover:text-accent-green transform hover:scale-125 transition duration-300 ease-in-out" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp text-3xl"></i>
+                </a>
+                <a href="https://facebook.com/severuntech" target="_blank" class="text-white hover:text-accent-green transform hover:scale-125 transition duration-300 ease-in-out" aria-label="Facebook">
+                    <i class="fab fa-facebook text-3xl"></i>
+                </a>
+                <a href="https://instagram.com/severuntech" target="_blank" class="text-white hover:text-accent-green transform hover:scale-125 transition duration-300 ease-in-out" aria-label="Instagram">
+                    <i class="fab fa-instagram text-3xl"></i>
+                </a>
+            </div>
+            <p class="text-sm text-gray-400">Diseñado con <span class="text-red-500">&hearts;</span> en Ibarra, Ecuador.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when clicking outside (optional, but good UX)
+        document.addEventListener('click', function(event) {
+            const isClickInside = mobileMenu.contains(event.target) || mobileMenuButton.contains(event.target);
+            if (!isClickInside && !mobileMenu.classList.contains('hidden')) {
+                toggleMobileMenu();
+            }
+        });
+    </script>
+</body>
+</html>
