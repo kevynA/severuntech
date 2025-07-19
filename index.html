@@ -86,6 +86,59 @@
                 </a>
             </div>
         </section>
+        <!-- Sección de Carrusel de Videos -->
+        <section id="videos" class="py-16 bg-primary-blue text-white rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-8 px-4">
+            <div class="container mx-auto text-center relative">
+                <h2 class="text-3xl md:text-4xl font-bold mb-10">Nuestros Videos Destacados</h2>
+                <p class="mb-8 text-lg">Mira cómo trabajamos y algunos de nuestros tips tecnológicos.</p>
+
+                <div class="video-carousel-container relative w-full max-w-4xl mx-auto rounded-lg shadow-xl">
+                    <div id="video-carousel-wrapper" class="video-carousel-wrapper">
+                        <!-- Video 1: Placeholder YouTube Embed -->
+                        <div class="video-carousel-item aspect-w-16 aspect-h-9 w-full">
+                            <iframe
+                                class="w-full h-full rounded-lg"
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0"
+                                title="YouTube video player 1"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                            ></iframe>
+                        </div>
+                        <!-- Video 2: Placeholder YouTube Embed -->
+                        <div class="video-carousel-item aspect-w-16 aspect-h-9 w-full">
+                            <iframe
+                                class="w-full h-full rounded-lg"
+                                src="https://www.youtube.com/embed/VIDEO_ID_2?controls=0"
+                                title="YouTube video player 2"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                            ></iframe>
+                        </div>
+                        <!-- Video 3: Placeholder YouTube Embed -->
+                        <div class="video-carousel-item aspect-w-16 aspect-h-9 w-full">
+                            <iframe
+                                class="w-full h-full rounded-lg"
+                                src="https://www.youtube.com/embed/VIDEO_ID_3?controls=0"
+                                title="YouTube video player 3"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                            ></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Navigation Buttons -->
+                    <button id="prev-video" class="absolute left-4 top-1/2 -translate-y-1/2 bg-dark-gray text-white p-3 rounded-full shadow-lg hover:bg-opacity-80 transition duration-300 ease-in-out">
+                        <i class="fas fa-chevron-left text-xl"></i>
+                    </button>
+                    <button id="next-video" class="absolute right-4 top-1/2 -translate-y-1/2 bg-dark-gray text-white p-3 rounded-full shadow-lg hover:bg-opacity-80 transition duration-300 ease-in-out">
+                        <i class="fas fa-chevron-right text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
 
         <!-- Sección de Servicios de Mantenimiento -->
         <section id="services" class="py-16 bg-white rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-8 px-4">
