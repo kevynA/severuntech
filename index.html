@@ -3,680 +3,500 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEVERUN TECH</title>
-    <!-- Tailwind CSS CDN -->
+    <title>SEVERUNTECH | Soluciones Tecnológicas en Ibarra</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons (e.g., shopping cart, WhatsApp) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6D28D9',
+                        secondary: '#8B5CF6',
+                        accent: '#A78BFA'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Diffused purple background */
-            background: linear-gradient(135deg, #6B46C1 0%, #A78BFA 50%, #6B46C1 100%);
-            background-size: 200% 200%;
-            animation: gradientAnimation 15s ease infinite;
-            color: #fff; /* White text for contrast */
-        }
-
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Custom styles for button animations */
-        .btn-animated {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-animated::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.4s ease, height 0.4s ease;
-            z-index: 0;
-        }
-
-        .btn-animated:hover::before {
-            width: 200%;
-            height: 200%;
-        }
-
-        .btn-animated span {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Specific styles for the product carousel */
-        .carousel-container {
-        position: relative;
-        padding: 0 10px;
-    }
-    
-    .carousel-wrapper {
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        margin: 0 -10px;
-    }
-    
-    .carousel-wrapper::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .inner-carousel {
-        display: flex;
-        transition: transform 0.3s ease;
-    }
-    
-    .carousel-item {
-        scroll-snap-align: start;
-        padding: 0 6px;
-    }
-    
-    .btn-animated {
-        transition: all 0.3s ease;
-        transform: translateY(0);
-    }
-    
-    .btn-animated:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    
-    @media (min-width: 768px) {
-        .carousel-container {
-            padding: 0 40px;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
         
-        .carousel-wrapper {
-            margin: 0 -20px;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6D28D9 0%, #8B5CF6 50%, #A78BFA 100%);
+            color: white;
             overflow-x: hidden;
         }
-    }
-
-        /* Modal for shopping cart */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 100; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            justify-content: center;
-            align-items: center;
+        
+        .hero-image {
+            animation: fadeIn 1.5s ease-out;
         }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 500px;
-            color: #333; /* Darker text for modal content */
-            position: relative;
+        
+        .hero-section {
+            min-height: 70vh;
         }
-
-        .close-button {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
+        
+        .product-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
         }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
-
-        /* Floating WhatsApp button */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 40px;
-            right: 40px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 99;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.3s ease;
+        
+        .cart-btn {
+            transition: all 0.3s ease;
         }
-
-        .whatsapp-float:hover {
+        
+        .cart-btn:hover {
             transform: scale(1.1);
+            background-color: #4C1D95;
         }
-
-        /* Custom style for the new hero section background image */
-        .hero-background {
-            background-image: url('henry.jpg'); /* Placeholder image */
-            background-size: cover;
-            background-position: center;
-            position: relative;
+        
+        .social-icon {
+            transition: all 0.3s ease;
         }
-
-        .hero-background::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(107, 70, 193, 0.7); /* Purple overlay with opacity */
-            backdrop-filter: blur(3px); /* Diffused effect */
-            border-radius: 1.5rem;
+        
+        .social-icon:hover {
+            transform: scale(1.2);
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 1s ease-out;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .cart-item {
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        .carousel {
+            scroll-behavior: smooth;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
-
-    <!-- Header -->
-    <header class="bg-purple-900 bg-opacity-70 shadow-lg py-4 px-6 rounded-b-3xl">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-white">SEVERUN TECH</h1>
-            <nav class="hidden md:flex space-x-6">
-                <a href="#inicio" class="text-white hover:text-purple-300 transition duration-300">Inicio</a>
-                <a href="#productos" class="text-white hover:text-purple-300 transition duration-300">Productos</a>
-                <a href="#servicios" class="text-white hover:text-purple-300 transition duration-300">Servicios</a>
-                <a href="#contacto" class="text-white hover:text-purple-300 transition duration-300">Contacto</a>
-            </nav>
-            <div class="md:hidden">
-                <button id="menu-button" class="text-white focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
+<body>
+    <!-- Header/Navigation -->
+    <header class="glass-effect fixed w-full z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold">SEVERUNTECH</span>
             </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden mt-4">
-            <nav class="flex flex-col space-y-2">
-                <a href="#inicio" class="text-white hover:text-purple-300 transition duration-300 px-4 py-2 rounded-lg">Inicio</a>
-                <a href="#productos" class="text-white hover:text-purple-300 transition duration-300 px-4 py-2 rounded-lg">Productos</a>
-                <a href="#servicios" class="text-white hover:text-purple-300 transition duration-300 px-4 py-2 rounded-lg">Servicios</a>
-                <a href="#contacto" class="text-white hover:text-purple-300 transition duration-300 px-4 py-2 rounded-lg">Contacto</a>
-            </nav>
-        </div>
+            <div class="flex items-center space-x-4">
+                <a href="#products" class="hover:text-gray-300 transition">Productos</a>
+                <a href="#contact" class="hover:text-gray-300 transition">Contacto</a>
+                <div class="relative">
+                    <button id="cart-toggle" class="relative">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
+                    </button>
+                    <div id="cart-dropdown" class="hidden absolute right-0 mt-2 w-72 bg-white text-gray-800 rounded-lg shadow-xl z-50 p-4">
+                        <div id="cart-items" class="max-h-60 overflow-y-auto">
+                            <!-- Cart items will be added here -->
+                            <p class="text-center py-4">Tu carrito está vacío</p>
+                        </div>
+                        <div class="border-t mt-2 pt-2 flex justify-between items-center">
+                            <span class="font-bold">Total:</span>
+                            <span id="cart-total">$0.00</span>
+                        </div>
+                        <button id="whatsapp-checkout" class="w-full mt-3 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg flex items-center justify-center transition">
+                            <i class="fab fa-whatsapp mr-2"></i> Completar por WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </header>
 
-    <main class="flex-grow container mx-auto p-6">
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-32">
+        <div class="hero-image w-full h-full absolute inset-0 overflow-hidden">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0fdb8472-4f84-4847-8ad8-711f754ee197.png" alt="Vanguardia tecnológica en Ibarra: Expertos trabajando con dispositivos de última generación" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-purple-900/90 via-purple-900/60 to-purple-900/20"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10 animate-slide-up text-center">
+                <h1 class="hero-text text-4xl md:text-6xl font-bold mb-4">Soluciones Tecnológicas en Ibarra</h1>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">Ofrecemos los productos y servicios tecnológicos más innovadores para impulsar tu negocio o estilo de vida digital.</p>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <a href="#products" class="bg-white text-primary px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition duration-300">Explorar Productos</a>
+                    <a href="#contact" class="border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-primary transition duration-300">Contactarnos</a>
+                </div>
+        </div>
+    </section>
 
-        <!-- Inicio Section (Normal with diffused image, text, slogan) -->
-        <section id="inicio" class="my-12 bg-white bg-opacity-20 backdrop-blur-sm p-8 rounded-3xl shadow-xl hero-background flex items-center justify-center text-center py-20">
-            <div class="hero-content">
-                <h2 class="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">SEVERUN TECH</h2>
-                <p class="text-2xl md:text-3xl font-semibold text-purple-200 mb-6">"Tu Solución Tecnológica Integral"</p>
-                <p class="text-lg md:text-xl text-gray-100 max-w-2xl mx-auto">
-                    En SEVERUN TECH, ofrecemos lo último en productos tecnológicos y servicios especializados para mantener tus equipos siempre al máximo rendimiento. ¡Explora nuestras soluciones!
-                </p>
-                <a href="#productos" class="btn-animated bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-8 rounded-full text-xl mt-8 inline-block">
-                    <span>Ver Productos</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- Products Section - Fixed Complete View -->
-<section id="productos" class="my-12 bg-white bg-opacity-20 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-xl w-full">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 md:mb-8">Nuestros Productos</h2>
-    
-    <div class="carousel-container relative w-full mx-auto">
-        <!-- Carousel Navigation Buttons -->
-        <button class="carousel-button prev hidden md:block absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 z-10 transition-all" onclick="moveCarousel('all-products-carousel', -1)">
-            &#10094;
-        </button>
-        
-        <div class="carousel-wrapper w-full overflow-x-auto pb-4" id="all-products-carousel">
-            <div class="inner-carousel flex w-max space-x-6 px-2">
-                <!-- Product Card 1 -->
-                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
-                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
-                        <img src="Disco sólido 480.png" alt="Disco Sólido" class="rounded-lg mb-4 w-40 h-40 object-contain">
-                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Disco Sólido de 480 GB</h3>
-                        <p class="text-gray-200 text-sm md:text-base mb-4">545 Mb/s de velocidad de lectura. (Para repotenciar tus equipos)</p>
-                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">$45.00</p>
-                        <div class="flex flex-col space-y-2 w-full">
-                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod1', name: 'Disco Sólido de 480 GB', price: 45.00})">
-                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                            </button>
-                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod1', name: 'Disco Sólido de 480 GB', price: 45.00})">
-                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+    <!-- Products Section -->
+    <section id="products" class="py-16 px-4 bg-white bg-opacity-10">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-10 text-center">Nuestros Productos Destacados</h2>
+            
+            <div class="relative">
+                <div class="carousel flex overflow-x-auto pb-4 gap-6 scrollbar-hide">
+                    <!-- Product Cards (6 example products) -->
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/84b1b811-bca1-442f-88d9-1533f3188afe.png" alt="Laptop de última generación con pantalla OLED y diseño ultradelgado" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Laptop Premium</h3>
+                        <p class="text-sm mb-3">Potencia y elegancia en un solo dispositivo</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$1,299</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Laptop Premium', 1299)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
                             </button>
                         </div>
                     </div>
-                </div>
-
-                <!-- Product Card 2 -->
-                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
-                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
-                        <img src="image (2).png" alt="Cable USB-C" class="rounded-lg mb-4 w-40 h-40 object-contain">
-                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Cable cargador USB-C</h3>
-                        <p class="text-gray-200 text-sm md:text-base mb-4">2 metros de cable para cargar. (Tipo C)</p>
-                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">$5.00</p>
-                        <div class="flex flex-col space-y-2 w-full">
-                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod2', name: 'Cable cargador USB-C', price: 5.00})">
-                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                            </button>
-                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod2', name: 'Cable cargador USB-C', price: 5.00})">
-                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+                    
+                    <!-- Repeat similar product cards -->
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9b2550fb-f241-4d4a-89e9-30f453798bc4.png" alt="Smartphone de gama alta con triple cámara y pantalla AMOLED" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Smartphone Pro</h3>
+                        <p class="text-sm mb-3">Rendimiento excepcional en tu bolsillo</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$899</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Smartphone Pro', 899)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
                             </button>
                         </div>
                     </div>
-                </div>
-
-                <!-- Product Card 3 -->
-                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
-                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
-                        <img src="Kasa Smart Light.png" alt="Tira LED" class="rounded-lg mb-4 w-40 h-40 object-contain">
-                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Tira de luz LED inteligente</h3>
-                        <p class="text-gray-200 text-sm md:text-base mb-4">Alto brillo con 16 millones de colores, RGB, agrupación, longitud ajustable.</p>
-                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">$60.00</p>
-                        <div class="flex flex-col space-y-2 w-full">
-                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod3', name: 'Tira de luz LED inteligente', price: 60.00})">
-                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                            </button>
-                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod3', name: 'Tira de luz LED inteligente', price: 60.00})">
-                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+                    
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4596a804-63b6-4961-afa3-571197e94666.png" alt="Tablet versátil con lápiz digital y teclado desmontable" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <3 class="font-bold text-lg mb-2">Tablet Multiusos</h3>
+                        <p class="text-sm mb-3">Productividad y entretenimiento en cualquier lugar</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$649</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Tablet Multiusos', 649)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
                             </button>
                         </div>
                     </div>
-                </div>
-
-                <!-- Product Card 4 -->
-                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
-                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
-                        <img src="Smart Wifi Led.png" alt="Extensión LED" class="rounded-lg mb-4 w-40 h-40 object-contain">
-                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Extensión de luces LED Wi-Fi</h3>
-                        <p class="text-gray-200 text-sm md:text-base mb-4">Crea ambientes mágicos con la iluminación perfecta, desde donde estés.</p>
-                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">Consultar disponibilidad</p>
-                        <div class="flex flex-col space-y-2 w-full">
-                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod4', name: 'Extensión de luces LED Wi-Fi', price: 0})">
-                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                            </button>
-                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod4', name: 'Extensión de luces LED Wi-Fi', price: 0})">
-                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+                    
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/39101c1f-e956-470c-a2e1-e32044c06189.png" alt="Monitor ultrapanorámico con resolución 4K y tasa de refresco 144Hz" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Monitor 4K</h3>
+                        <p class="text-sm mb-3">Experiencia visual inmersiva</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$549</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Monitor 4K', 549)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
                             </button>
                         </div>
                     </div>
-                </div>
-
-                <!-- Product Card 5 -->
-                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
-                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
-                        <img src="Smart Bulb.png" alt="Foco Inteligente" class="rounded-lg mb-4 w-40 h-40 object-contain">
-                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Foco inteligente wirelesszone</h3>
-                        <p class="text-gray-200 text-sm md:text-base mb-4">Control por app, compatible con wifi 2.4, luz RGB y de alta duración.</p>
-                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">Consultar disponibilidad</p>
-                        <div class="flex flex-col space-y-2 w-full">
-                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod5', name: 'Foco inteligente wirelesszone', price: 0})">
-                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                            </button>
-                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod5', name: 'Foco inteligente wirelesszone', price: 0})">
-                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+                    
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/55e28160-3e38-4fed-b9a7-e31757ed9acd.png" alt="Auriculares inalámbricos con cancelación de ruido y sonido envolvente" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Auriculares Premium</h3>
+                        <p class="text-sm mb-3">Audio de alta fidelidad sin cables</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$329</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Auriculares Premium', 329)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
                             </button>
                         </div>
                     </div>
-                </div>
-
-                <!-- Product Card 6 -->
-                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
-                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
-                        <img src="image.png" alt="Cargador Inalámbrico" class="rounded-lg mb-4 w-40 h-40 object-contain">
-                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Cargador Inalámbrico</h3>
-                        <p class="text-gray-200 text-sm md:text-base mb-4">Cargador inalámbrico rápido de 15W con indicador LED.</p>
-                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">$12.00</p>
-                        <div class="flex flex-col space-y-2 w-full">
-                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod6', name: 'Cargador Inalámbrico', price: 12.00})">
-                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                            </button>
-                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod6', name: 'Cargador Inalámbrico', price: 12.00})">
-                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+                    
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a5f45f22-0614-42e1-a9ad-eecb89739e1e.png" alt="Drone de última generación con cámara 4K y control por gestos" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Drone Profesional</h3>
+                        <p class="text-sm mb-3">Captura vistas espectaculares desde el cielo</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$1,199</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Drone Profesional', 1199)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <button class="carousel-button next hidden md:block absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 z-10 transition-all" onclick="moveCarousel('all-products-carousel', 1)">
-            &#10095;
-        </button>
-    </div>
-
-    <div class="text-center mt-6 md:mt-8">
-        <button class="btn-animated bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-full text-lg md:text-xl" onclick="openCartModal()">
-            <i class="fas fa-shopping-cart mr-2"></i><span>Ver Carrito (<span id="cart-count">0</span>)</span>
-        </button>
-    </div>
-</section>
-
-        <!-- Services Section -->
-        <section id="servicios" class="my-12 bg-white bg-opacity-20 backdrop-blur-sm p-8 rounded-3xl shadow-xl">
-            <h2 class="text-4xl font-bold text-center mb-8">Nuestros Servicios</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Service Card 1 -->
-                <div class="bg-purple-800 bg-opacity-70 p-6 rounded-2xl shadow-lg text-center">
-                    <i class="fas fa-laptop text-5xl text-purple-300 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Mantenimiento de Computadoras y Laptops</h3>
-                    <p class="text-gray-200">Diagnóstico, reparación, limpieza interna y optimización de rendimiento para tus equipos.</p>
-                </div>
-                <!-- Service Card 2 -->
-                <div class="bg-purple-800 bg-opacity-70 p-6 rounded-2xl shadow-lg text-center">
-                    <i class="fas fa-print text-5xl text-purple-300 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Mantenimiento de Impresoras</h3>
-                    <p class="text-gray-200">Reparación de fallas, limpieza de cabezales, recarga de tinta y solución de problemas de conectividad.</p>
-                </div>
-                <!-- Service Card 3 -->
-                <div class="bg-purple-800 bg-opacity-70 p-6 rounded-2xl shadow-lg text-center">
-                    <i class="fas fa-cogs text-5xl text-purple-300 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Mantenimiento de Otros Equipos Electrónicos</h3>
-                    <p class="text-gray-200">Servicio técnico especializado para una variedad de dispositivos electrónicos.</p>
-                </div>
-                <!-- Service Card 4 -->
-                <div class="bg-purple-800 bg-opacity-70 p-6 rounded-2xl shadow-lg text-center">
-                    <i class="fas fa-video text-5xl text-purple-300 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Instalación de Cámaras de Seguridad</h3>
-                    <p class="text-gray-200">Sistemas de vigilancia profesionales para tu seguridad y tranquilidad.</p>
-                </div>
-                <!-- Service Card 5 -->
-                <div class="bg-purple-800 bg-opacity-70 p-6 rounded-2xl shadow-lg text-center">
-                    <i class="fas fa-ethernet text-5xl text-purple-300 mb-4"></i>
-                    <h3 class="text-2xl font-semibold mb-2">Instalación de Fibra Óptica</h3>
-                    <p class="text-gray-200">Conexión a internet de alta velocidad y estabilidad para tu hogar o negocio.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contacto" class="my-12 bg-white bg-opacity-20 backdrop-blur-sm p-8 rounded-3xl shadow-xl">
-            <h2 class="text-4xl font-bold text-center mb-8">Contáctanos</h2>
-            <div class="flex flex-col md:flex-row gap-8 items-center">
-                <div class="md:w-1/2 w-full">
-                    <h3 class="text-2xl font-semibold mb-4">Nuestra Ubicación</h3>
-                    <div class="rounded-xl overflow-hidden shadow-lg h-64 md:h-96 w-full">
-                        <!-- Google Maps Embed - Replace with your actual location -->
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.795094285199!2d-78.1257497858603!3d0.3547050997193211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d53f0b2f7d9e7f%3A0x7e7d9e7d9e7d9e7d!2sIbarra%2C%20Imbabura%2C%20Imbabura%2C%20Ecuador!5e0!3m2!1sen!2sec!4v1678901234567!5m2!1sen!2sec"
-                            width="100%"
-                            height="100%"
-                            style="border:0;"
-                            allowfullscreen=""
+    <!-- Contact & Map Section -->
+    <section id="contact" class="py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-10 text-center">Ubícanos en Ibarra</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-1/2 glass-effect p-6 rounded-xl">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.790939688471!2d-78.116872!3d0.3456379999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e2c3b9a9c9c9c9d%3A0x9c9c9c9c9c9c9c9c!2sIbarra!5e0!3m2!1sen!2sec!4v1620000000000!5m2!1sen!2sec" 
+                            width="100%" 
+                            height="300" 
+                            style="border:0;" 
+                            allowfullscreen="" 
                             loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                            class="rounded-lg"></iframe>
+                </div>
+                
+                <div class="lg:w-1/2 glass-effect p-6 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Contáctanos</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-4 text-xl"></i>
+                            <p>Av. Atahualpa 1234, Ibarra, Ecuador</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone-alt mr-4 text-xl"></i>
+                            <p>+593 99 999 9999</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope mr-4 text-xl"></i>
+                            <p>info@severuntech.com</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock mr-4 text-xl"></i>
+                            <p>Lunes a Viernes: 9:00 - 18:00<br>Sábados: 10:00 - 14:00</p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold flex items-center transition duration-300">
+                            <i class="fab fa-whatsapp mr-2"></i> Chatear ahora por WhatsApp
+                        </button>
                     </div>
                 </div>
-                <div class="md:w-1/2 w-full text-center md:text-left">
-                    <h3 class="text-2xl font-semibold mb-4">Información de Contacto</h3>
-                    <p class="text-lg mb-2"><i class="fas fa-map-marker-alt mr-2 text-purple-300"></i>Dirección: Calle Principal 123, Ibarra, Ecuador</p>
-                    <p class="text-lg mb-2"><i class="fas fa-phone mr-2 text-purple-300"></i>Teléfono: +593 99 123 4567</p>
-                    <p class="text-lg mb-2"><i class="fas fa-envelope mr-2 text-purple-300"></i>Email: info@severuntech.com</p>
-                    <p class="text-lg mb-2"><i class="fab fa-whatsapp mr-2 text-purple-300"></i>WhatsApp: +593 99 123 4567</p>
-                    <a href="mailto:info@severuntech.com" class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full mt-4 inline-block">
-                        <span>Enviar un Email</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary bg-opacity-90 py-10 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold">SEVERUNTECH</span>
+                    <p class="mt-2">Tecnología de vanguardia en Ibarra</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="social-icon text-2xl hover:text-accent transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon text-2xl hover:text-accent transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon text-2xl hover:text-accent transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon text-2xl hover:text-accent transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-icon text-2xl hover:text-accent transition">
+                        <i class="fab fa-youtube"></i>
                     </a>
                 </div>
             </div>
-        </section>
-
-        <!-- Social Media Section -->
-        <section id="redes-sociales" class="my-12 bg-white bg-opacity-20 backdrop-blur-sm p-8 rounded-3xl shadow-xl text-center">
-            <h2 class="text-4xl font-bold mb-8">Síguenos en Redes Sociales</h2>
-            <div class="flex flex-wrap justify-center gap-6">
-                <a href="https://facebook.com/severuntech" target="_blank" class="btn-animated bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full flex items-center">
-                    <i class="fab fa-facebook-f text-2xl mr-2"></i><span>Facebook</span>
-                </a>
-                <a href="https://instagram.com/severuntech" target="_blank" class="btn-animated bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-full flex items-center">
-                    <i class="fab fa-instagram text-2xl mr-2"></i><span>Instagram</span>
-                </a>
-                <a href="https://tiktok.com/@severuntech" target="_blank" class="btn-animated bg-black hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-full flex items-center">
-                    <i class="fab fa-tiktok text-2xl mr-2"></i><span>TikTok</span>
-                </a>
-                <a href="https://wa.me/593991234567" target="_blank" class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full flex items-center">
-                    <i class="fab fa-whatsapp text-2xl mr-2"></i><span>WhatsApp</span>
-                </a>
+            
+            <div class="mt-8 pt-6 border-t border-white border-opacity-20 text-center text-sm">
+                <p>© 2023 SEVERUNTECH. Todos los derechos reservados.</p>
             </div>
-        </section>
-
-    </main>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/593991234567" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Shopping Cart Modal -->
-    <div id="cartModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeCartModal()">&times;</span>
-            <h2 class="text-3xl font-bold mb-4 text-purple-800">Tu Carrito de Compras</h2>
-            <div id="cart-items" class="mb-4">
-                <!-- Cart items will be listed here -->
-                <p class="text-gray-600">El carrito está vacío.</p>
-            </div>
-            <p class="text-xl font-semibold text-right text-purple-800">Total: $<span id="cart-total">0.00</span></p>
-            <div class="flex flex-col sm:flex-row justify-end gap-4 mt-6">
-                <button class="btn-animated bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full" onclick="clearCart()">
-                    <span>Vaciar Carrito</span>
-                </button>
-                <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full" onclick="checkoutViaWhatsApp()">
-                    <span>Proceder al Pago por WhatsApp</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-purple-900 bg-opacity-70 shadow-lg py-6 px-6 mt-12 rounded-t-3xl text-center text-white">
-        <p>&copy; 2025 SEVERUN TECH. Todos los derechos reservados.</p>
-        <div class="flex justify-center space-x-4 mt-4">
-            <a href="#" class="text-white hover:text-purple-300 transition duration-300"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="text-white hover:text-purple-300 transition duration-300"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="text-white hover:text-purple-300 transition duration-300"><i class="fab fa-twitter"></i></a>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.getElementById('menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Carousel Logic (Generalized for multiple carousels)
-        const carouselStates = {}; // Stores current slide index for each carousel
-
-        function initializeCarousel(carouselId) {
-            carouselStates[carouselId] = 0;
-            const carouselWrapper = document.getElementById(carouselId);
-            const carouselItems = carouselWrapper.querySelectorAll('.carousel-item');
-            const totalSlides = carouselItems.length;
-
-            // Auto-advance carousel (only for the products carousel, not the new static home)
-            if (carouselId === 'all-products-carousel') {
-                setInterval(() => {
-                    moveCarousel(carouselId, 1);
-                }, 5000); // Change slide every 5 seconds
-            }
-        }
-
-       function moveCarousel(carouselId, direction) {
-        const carousel = document.getElementById(carouselId);
-        const innerCarousel = carousel.querySelector('.inner-carousel');
-        const item = carousel.querySelector('.carousel-item');
-        const itemWidth = item.offsetWidth + 12; // item width + margin
-        
-        // Calculate scroll amount (show 1 item on mobile, 2-3 on desktop)
-        const scrollAmount = itemWidth * direction * (window.innerWidth < 768 ? 1 : Math.max(1, Math.floor(window.innerWidth / itemWidth) - 1));
-        
-        carousel.scrollBy({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
-    });
-
-        // Shopping Cart Logic
+        // Cart functionality
         let cart = [];
-        const cartModal = document.getElementById('cartModal');
-        const cartItemsContainer = document.getElementById('cart-items');
-        const cartTotalSpan = document.getElementById('cart-total');
-        const cartCountSpan = document.getElementById('cart-count');
-        const whatsappPhoneNumber = '593991234567'; // Replace with your WhatsApp number
-
-        function updateCartDisplay() {
-            cartItemsContainer.innerHTML = '';
-            let total = 0;
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p class="text-gray-600">El carrito está vacío.</p>';
+        
+        // Toggle cart dropdown
+        document.getElementById('cart-toggle').addEventListener('click', function() {
+            const dropdown = document.getElementById('cart-dropdown');
+            dropdown.classList.toggle('hidden');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const cartToggle = document.getElementById('cart-toggle');
+            const dropdown = document.getElementById('cart-dropdown');
+            
+            if (!cartToggle.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+        
+        // Add to cart function
+        function addToCart(name, price) {
+            // Check if item already in cart
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
             } else {
-                cart.forEach(item => {
-                    const itemElement = document.createElement('div');
-                    itemElement.classList.add('flex', 'justify-between', 'items-center', 'mb-2', 'pb-2', 'border-b', 'border-gray-200');
-                    itemElement.innerHTML = `
-                        <p class="text-gray-800">${item.name} x ${item.quantity}</p>
-                        <div class="flex items-center">
-                            <span class="text-gray-800 font-semibold">$${(item.price * item.quantity).toFixed(2)}</span>
-                            <button class="ml-4 text-red-500 hover:text-red-700" onclick="removeFromCart('${item.id}')">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    `;
-                    cartItemsContainer.appendChild(itemElement);
-                    total += item.price * item.quantity;
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
                 });
             }
-            cartTotalSpan.textContent = total.toFixed(2);
-            cartCountSpan.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            updateCart();
+            
+            // Show cart dropdown
+            document.getElementById('cart-dropdown').classList.remove('hidden');
+            
+            // Animation feedback
+            const btn = event.target.closest('button');
+            btn.innerHTML = `<i class="fas fa-check mr-1"></i> Agregado`;
+            setTimeout(() => {
+                btn.innerHTML = `<i class="fas fa-cart-plus mr-1"></i> Agregar`;
+            }, 1000);
         }
-
-        function addToCart(product) {
-            const existingItem = cart.find(item => item.id === product.id);
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                cart.push({ ...product, quantity: 1 });
-            }
-            updateCartDisplay();
-            // Show a temporary message (replace alert)
-            showMessage('Producto añadido al carrito!', 'success');
-        }
-
-        function removeFromCart(productId) {
-            const itemIndex = cart.findIndex(item => item.id === productId);
-            if (itemIndex > -1) {
-                if (cart[itemIndex].quantity > 1) {
-                    cart[itemIndex].quantity--;
-                } else {
-                    cart.splice(itemIndex, 1);
-                }
-            }
-            updateCartDisplay();
-            showMessage('Producto eliminado del carrito.', 'info');
-        }
-
-        function clearCart() {
-            cart = [];
-            updateCartDisplay();
-            showMessage('El carrito ha sido vaciado.', 'info');
-        }
-
-        function openCartModal() {
-            cartModal.style.display = 'flex';
-        }
-
-        function closeCartModal() {
-            cartModal.style.display = 'none';
-        }
-
-        // Close modal if clicked outside content
-        window.onclick = function(event) {
-            if (event.target == cartModal) {
-                closeCartModal();
-            }
-        }
-
-        function orderViaWhatsApp(product) {
-            const message = `¡Hola! Me gustaría ordenar el siguiente producto: ${product.name} - $${product.price.toFixed(2)}.`;
-            window.open(`https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-        }
-
-        function checkoutViaWhatsApp() {
+        
+        // Update cart display
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+            
+            // Update count
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
             if (cart.length === 0) {
-                showMessage('Tu carrito está vacío. Añade productos antes de proceder.', 'warning');
+                cartItemsContainer.innerHTML = '<p class="text-center py-4">Tu carrito está vacío</p>';
+                cartTotal.textContent = '$0.00';
                 return;
             }
-
-            let message = '¡Hola! Me gustaría hacer un pedido con los siguientes productos:\n\n';
+            
+            // Update items
+            cartItemsContainer.innerHTML = '';
             let total = 0;
+            
             cart.forEach(item => {
-                message += `- ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
-                total += item.price * item.quantity;
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item flex justify-between items-center py-2 border-b';
+                cartItem.innerHTML = `
+                    <div>
+                        <h4 class="font-semibold">${item.name}</h4>
+                        <div class="flex items-center text-sm">
+                            <button onclick="updateQuantity('${item.name}', -1)" class="px-2 py-1">-</button>
+                            <span class="mx-2">${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.name}', 1)" class="px-2 py-1">+</button>
+                        </div>
+                    </div>
+                    <div>
+                        <span>$${(itemTotal.toFixed(2))}</span>
+                        <button onclick="removeFromCart('${item.name}')" class="ml-4 text-red-500">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                cartItemsContainer.appendChild(cartItem);
             });
-            message += `\nTotal: $${total.toFixed(2)}\n\n`;
-            message += 'Por favor, confírmame los detalles de mi pedido.';
-
-            window.open(`https://wa.me/${whatsappPhoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-            clearCart(); // Clear cart after sending order
-            closeCartModal();
+            
+            // Update total
+            cartTotal.textContent = `$${total.toFixed(2)}`;
         }
-
-        // Custom Message Box (instead of alert)
-        function showMessage(msg, type = 'info') {
-            const messageBox = document.createElement('div');
-            messageBox.classList.add('fixed', 'bottom-8', 'left-1/2', 'transform', '-translate-x-1/2', 'p-4', 'rounded-lg', 'shadow-lg', 'text-white', 'z-50', 'transition-opacity', 'duration-500', 'opacity-0');
-
-            if (type === 'success') {
-                messageBox.classList.add('bg-green-500');
-            } else if (type === 'warning') {
-                messageBox.classList.add('bg-orange-500');
-            } else {
-                messageBox.classList.add('bg-blue-500');
+        
+        // Update item quantity
+        function updateQuantity(name, change) {
+            const item = cart.find(i => i.name === name);
+            if (!item) return;
+            
+            item.quantity += change;
+            
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.name !== name);
             }
-
-            messageBox.textContent = msg;
-            document.body.appendChild(messageBox);
-
-            // Animate in
-            setTimeout(() => {
-                messageBox.classList.remove('opacity-0');
-                messageBox.classList.add('opacity-100');
-            }, 100);
-
-            // Animate out and remove
-            setTimeout(() => {
-                messageBox.classList.remove('opacity-100');
-                messageBox.classList.add('opacity-0');
-                messageBox.addEventListener('transitionend', () => messageBox.remove());
-            }, 3000);
+            
+            updateCart();
         }
-
-        // Initial cart display update
-        updateCartDisplay();
+        
+        // Remove item from cart
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCart();
+        }
+        
+        // WhatsApp checkout
+        document.getElementById('whatsapp-checkout').addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+            
+            const phone = '593999999999';
+            const products = cart.map(item => 
+                `${item.name} (${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`
+            ).join('\n');
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            const message = encodeURIComponent(
+                `Hola SEVERUNTECH! Estoy interesado en los siguientes productos:\n\n${products}\n\nTotal: $${total.toFixed(2)}\n\nPor favor envíen más información.`
+            );
+            
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+            
+            // Close cart dropdown
+            document.getElementById('cart-dropdown').classList.add('hidden');
+        });
+        
+        // Scroll animations
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.animate-slide-up');
+            
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const isVisible = (rect.top <= window.innerHeight * 0.8);
+                
+                if (isVisible) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        // Trigger initial animations
+        document.querySelectorAll('.animate-slide-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+        });
     </script>
 </body>
 </html>
