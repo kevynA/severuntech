@@ -146,21 +146,6 @@
             .hero-text {
                 font-size: 1.5rem;
             }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-button {
-                display: block;
-            }
-        }
-        
-        /* Estilos para cuando el menú no cabe */
-        @media (max-width: 1024px) {
-            .nav-links {
-                gap: 1rem;
-            }
         }
     </style>
 </head>
@@ -173,7 +158,7 @@
                     <span class="text-2xl font-bold">SEVERUNTECH</span>
                 </div>
                 
-                <!-- Menú normal (se oculta cuando no hay espacio) -->
+                <!-- Menú normal -->
                 <div class="nav-links">
                     <a href="#products" class="hover:text-gray-300 transition">Productos</a>
                     <a href="#contact" class="hover:text-gray-300 transition">Contacto</a>
@@ -197,7 +182,7 @@
                     </div>
                 </div>
                 
-                <!-- Botón del menú móvil (solo visible cuando no cabe el menú normal) -->
+                <!-- Botón del menú móvil -->
                 <div class="mobile-menu-button flex items-center space-x-4">
                     <div class="relative">
                         <button id="mobile-cart-toggle" class="relative">
@@ -221,25 +206,196 @@
         </nav>
     </header>
 
-    <!-- Resto del código permanece igual -->
     <!-- Hero Section -->
     <section class="relative pt-24 pb-32">
-        <!-- ... (contenido existente) ... -->
+        <div class="hero-image w-full h-full absolute inset-0 overflow-hidden">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0fdb8472-4f84-4847-8ad8-711f754ee197.png" alt="Vanguardia tecnológica en Ibarra: Expertos trabajando con dispositivos de última generación" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-purple-900/90 via-purple-900/60 to-purple-900/20"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10 animate-slide-up text-center">
+                <h1 class="hero-text text-4xl md:text-6xl font-bold mb-4">Soluciones Tecnológicas en Ibarra</h1>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">Ofrecemos los productos y servicios tecnológicos más innovadores para impulsar tu negocio o estilo de vida digital.</p>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <a href="#products" class="bg-white text-primary px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition duration-300">Explorar Productos</a>
+                    <a href="#contact" class="border-2 border-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-primary transition duration-300">Contactarnos</a>
+                </div>
+        </div>
     </section>
 
     <!-- Products Section -->
     <section id="products" class="py-16 px-4 bg-white bg-opacity-10">
-        <!-- ... (contenido existente) ... -->
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-10 text-center">Nuestros Productos Destacados</h2>
+            
+            <div class="relative">
+                <div class="carousel flex overflow-x-auto pb-4 gap-6 scrollbar-hide">
+                    <!-- Product Cards -->
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="Disco sólido 480.png" alt="Disco de estado sólido (480 GB)" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Disco de estado sólido (480 GB)</h3>
+                        <p class="text-sm mb-3">Compatible con la mayor parte de computadoras y laptops. Mejora el rendimiento.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$45</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Disco de estado sólido (480 GB)', 45)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="Kasa Smart Light.png" alt="Tira de luz inteligente Kasa" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Tira de luz inteligente Kasa Pro</h3>
+                        <p class="text-sm mb-3">Configurala mediante la aplicación Kasa Smart. Multicolor, horarios, inslación flexible y sencilla, control por voz y convinalo con otros dispositivos.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">Pendiente</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Smartphone Pro', 899)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="image.png" alt="Cargador Inalambrico Portatil" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Cargador Inalambrico Portatil</h3>
+                        <p class="text-sm mb-3">Carga tus equipos desde cualquier lugar. (15 W)</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$12</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Cargador Inalambrico Portatil', 12)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="image (5).png" alt="Reproductor de streaming Roku Express" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Reproductor de streaming Roku Express</h3>
+                        <p class="text-sm mb-3">Te permite transmitir películas, programas de TV, y acceder a canales y aplicaciones como Netflix, Prime Video, Disney+, YouTube, y más, directamente en tu televisor. </p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$55</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Reproductor de streaming Roku Express', 55)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/55e28160-3e38-4fed-b9a7-e31757ed9acd.png" alt="Auriculares inalámbricos con cancelación de ruido y sonido envolvente" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Auriculares Premium</h3>
+                        <p class="text-sm mb-3">Audio de alta fidelidad sin cables</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$329</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Auriculares Premium', 329)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card flex-shrink-0 w-64 rounded-xl p-4">
+                        <div class="mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a5f45f22-0614-42e1-a9ad-eecb89739e1e.png" alt="Drone de última generación con cámara 4K y control por gestos" class="w-full h-40 object-cover rounded-lg">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Drone Profesional</h3>
+                        <p class="text-sm mb-3">Captura vistas espectaculares desde el cielo</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold">$1,199</span>
+                            <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Drone Profesional', 1199)">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Contact & Map Section -->
     <section id="contact" class="py-16 px-4">
-        <!-- ... (contenido existente) ... -->
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-10 text-center">Ubícanos en Ibarra</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-8">
+                <div class="lg:w-1/2 glass-effect p-6 rounded-xl">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.790939688471!2d-78.116872!3d0.3456379999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e2c3b9a9c9c9c9d%3A0x9c9c9c9c9c9c9c9c!2sIbarra!5e0!3m2!1sen!2sec!4v1620000000000!5m2!1sen!2sec" 
+                            width="100%" 
+                            height="300" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            class="rounded-lg"></iframe>
+                </div>
+                
+                <div class="lg:w-1/2 glass-effect p-6 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Contáctanos</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-4 text-xl"></i>
+                            <p>Av. Atahualpa 1234, Ibarra, Ecuador</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone-alt mr-4 text-xl"></i>
+                            <p>+593 99 999 9999</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope mr-4 text-xl"></i>
+                            <p>info@severuntech.com</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock mr-4 text-xl"></i>
+                            <p>Lunes a Viernes: 9:00 - 18:00<br>Sábados: 10:00 - 14:00</p>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <button class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold flex items-center transition duration-300">
+                            <i class="fab fa-whatsapp mr-2"></i> Chatear ahora por WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-primary bg-opacity-90 py-10 px-4">
-        <!-- ... (contenido existente) ... -->
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-2xl font-bold">SEVERUNTECH</span>
+                    <p class="mt-2">Tecnología de vanguardia en Ibarra</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="social-icon text-2xl hover:text-accent transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon text-2xl hover:text-accent transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon text-2xl hover:text-accent transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon text-2xl hover:text-accent transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-icon text-2xl hover:text-accent transition">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-white border-opacity-20 text-center text-sm">
+                <p>© 2023 SEVERUNTECH. Todos los derechos reservados.</p>
+            </div>
+        </div>
     </footer>
 
     <script>
@@ -249,8 +405,8 @@
             const navLinks = document.querySelector('.nav-links');
             const mobileMenuButton = document.querySelector('.mobile-menu-button');
             
-            // Ocultar ambos primero
-            navLinks.style.display = 'none';
+            // Mostrar todo temporalmente para medir
+            navLinks.style.display = 'flex';
             mobileMenuButton.style.display = 'none';
             
             // Calcular el ancho disponible
@@ -259,7 +415,6 @@
             const availableWidth = navWidth - logoWidth - 40; // 40px de padding/margin
             
             // Calcular el ancho necesario para los enlaces
-            navLinks.style.display = 'flex';
             const neededWidth = navLinks.offsetWidth;
             
             if (neededWidth > availableWidth) {
@@ -290,7 +445,7 @@
             mobileMenu.classList.remove('open');
         }
         
-        // Cart functionality (igual que antes)
+        // Cart functionality
         let cart = [];
         
         // Toggle desktop cart dropdown
