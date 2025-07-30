@@ -59,53 +59,50 @@
 
         /* Specific styles for the product carousel */
         .carousel-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1.5rem; /* rounded-3xl */
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        padding: 0 10px;
+    }
+    
+    .carousel-wrapper {
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        margin: 0 -10px;
+    }
+    
+    .carousel-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .inner-carousel {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+    
+    .carousel-item {
+        scroll-snap-align: start;
+        padding: 0 6px;
+    }
+    
+    .btn-animated {
+        transition: all 0.3s ease;
+        transform: translateY(0);
+    }
+    
+    .btn-animated:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    @media (min-width: 768px) {
+        .carousel-container {
+            padding: 0 40px;
         }
-
+        
         .carousel-wrapper {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
+            margin: 0 -20px;
+            overflow-x: hidden;
         }
-
-        .carousel-item {
-            min-width: 100%;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            /* REMOVED: padding: 2rem; */ /* This was causing horizontal scroll on mobile */
-        }
-
-        .carousel-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .carousel-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px; /* rounded-full */
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .carousel-button.prev {
-            left: 1rem;
-        }
-
-        .carousel-button.next {
-            right: 1rem;
-        }
+    }
 
         /* Modal for shopping cart */
         .modal {
@@ -244,179 +241,139 @@
             </div>
         </section>
 
-        <!-- Products Section (Now a Carousel) -->
-<section id="productos" class="my-12 bg-white bg-opacity-20 backdrop-blur-sm p-8 rounded-3xl shadow-xl">
-    <h2 class="text-4xl font-bold text-center mb-8">Nuestros Productos</h2>
-    <div class="carousel-container relative w-full max-w-7xl mx-auto overflow-hidden">
-        <div class="carousel-wrapper flex transition-transform duration-300 ease-in-out" id="all-products-carousel">
-            <!-- Product Card 1 -->
-            <div class="carousel-item min-w-[300px] md:min-w-[400px] lg:min-w-[450px] px-4">
-                <div class="bg-purple-800 bg-opacity-70 p-6 rounded-2xl shadow-lg flex flex-col items-center text-center w-full h-full">
-                    <img src="Disco sólido 480.png" alt="PC Gamer" class="rounded-lg mb-4 w-full max-w-[200px] h-auto">
-                    <h3 class="text-2xl font-semibold mb-2">Disco Sólido de 480 GB</h3>
-                    <p class="text-gray-200 mb-4">545 Mb/s de velocidad de lectura. (Para repotenciar tus equipos)</p>
-                    <p class="text-3xl font-bold text-purple-300 mb-4">$45.00</p>
-                    <div class="flex flex-col sm:flex-row gap-4 w-full">
-                        <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="addToCart({id: 'prod1', name: 'Disco Sólido de 480 GB', price: 45.00})">
-                            <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                        </button>
-                        <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod1', name: 'Disco Sólido de 480 GB', price: 45.00})">
-                            <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
-                        </button>
+        <!-- Products Section - Fixed Complete View -->
+<section id="productos" class="my-12 bg-white bg-opacity-20 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-xl w-full">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 md:mb-8">Nuestros Productos</h2>
+    
+    <div class="carousel-container relative w-full mx-auto">
+        <!-- Carousel Navigation Buttons -->
+        <button class="carousel-button prev hidden md:block absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 z-10 transition-all" onclick="moveCarousel('all-products-carousel', -1)">
+            &#10094;
+        </button>
+        
+        <div class="carousel-wrapper w-full overflow-x-auto pb-4" id="all-products-carousel">
+            <div class="inner-carousel flex w-max space-x-6 px-2">
+                <!-- Product Card 1 -->
+                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
+                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
+                        <img src="Disco sólido 480.png" alt="Disco Sólido" class="rounded-lg mb-4 w-40 h-40 object-contain">
+                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Disco Sólido de 480 GB</h3>
+                        <p class="text-gray-200 text-sm md:text-base mb-4">545 Mb/s de velocidad de lectura. (Para repotenciar tus equipos)</p>
+                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">$45.00</p>
+                        <div class="flex flex-col space-y-2 w-full">
+                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod1', name: 'Disco Sólido de 480 GB', price: 45.00})">
+                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
+                            </button>
+                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod1', name: 'Disco Sólido de 480 GB', price: 45.00})">
+                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Product Card 2 -->
-            <div class="carousel-item min-w-[300px] md:min-w-[400px] lg:min-w-[450px] px-4">
-                <div class="bg-purple-800 bg-opacity-70 p-6 rounded-2xl shadow-lg flex flex-col items-center text-center w-full h-full">
-                    <img src="image (2).png" alt="PC Gamer" class="rounded-lg mb-4 w-full max-w-[200px] h-auto">
-                    <h3 class="text-2xl font-semibold mb-2">Cable cargador UBS-C</h3>
-                    <p class="text-gray-200 mb-4">2 metros de cable para cargar. (Tipo C)</p>
-                    <p class="text-3xl font-bold text-purple-300 mb-4">$5.00</p>
-                    <div class="flex flex-col sm:flex-row gap-4 w-full">
-                        <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="addToCart({id: 'prod2', name: 'Cable cargador UBS-C', price: 5.00})">
-                            <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                        </button>
-                        <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod2', name: 'Cable cargador UBS-C', price: 5.00})">
-                            <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
-                        </button>
+                <!-- Product Card 2 -->
+                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
+                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
+                        <img src="image (2).png" alt="Cable USB-C" class="rounded-lg mb-4 w-40 h-40 object-contain">
+                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Cable cargador USB-C</h3>
+                        <p class="text-gray-200 text-sm md:text-base mb-4">2 metros de cable para cargar. (Tipo C)</p>
+                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">$5.00</p>
+                        <div class="flex flex-col space-y-2 w-full">
+                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod2', name: 'Cable cargador USB-C', price: 5.00})">
+                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
+                            </button>
+                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod2', name: 'Cable cargador USB-C', price: 5.00})">
+                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Product Card 3 -->
-            <div class="carousel-item min-w-[300px] md:min-w-[400px] lg:min-w-[450px] px-4">
-                <div class="bg-purple-800 bg-opacity-70 p-6 rounded-2xl shadow-lg flex flex-col items-center text-center w-full h-full">
-                    <img src="Kasa Smart Light.png" alt="Tira de luz LED inteligente" class="rounded-lg mb-4 w-full max-w-[200px] h-auto">
-                    <h3 class="text-2xl font-semibold mb-2">Tira de luz LED inteligente</h3>
-                    <p class="text-gray-200 mb-4">Alto brillo con 16 millones de colores, RGB, agrupación, longitud ajustable, hasta 25,000 horas (KL400L5). (Conexión por WiFi, funciona con asistentes virtuales)</p>
-                    <p class="text-3xl font-bold text-purple-300 mb-4">$60.00</p>
-                    <div class="flex flex-col sm:flex-row gap-4 w-full">
-                        <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="addToCart({id: 'prod3', name: 'Tira de luz LED inteligente', price: 60.00})">
-                            <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                        </button>
-                        <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod3', name: 'Tira de luz LED inteligente', price: 60.00})">
-                            <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
-                        </button>
+                <!-- Product Card 3 -->
+                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
+                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
+                        <img src="Kasa Smart Light.png" alt="Tira LED" class="rounded-lg mb-4 w-40 h-40 object-contain">
+                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Tira de luz LED inteligente</h3>
+                        <p class="text-gray-200 text-sm md:text-base mb-4">Alto brillo con 16 millones de colores, RGB, agrupación, longitud ajustable.</p>
+                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">$60.00</p>
+                        <div class="flex flex-col space-y-2 w-full">
+                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod3', name: 'Tira de luz LED inteligente', price: 60.00})">
+                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
+                            </button>
+                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod3', name: 'Tira de luz LED inteligente', price: 60.00})">
+                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Product Card 4 -->
-            <div class="carousel-item min-w-[300px] md:min-w-[400px] lg:min-w-[450px] px-4">
-                <div class="bg-purple-800 bg-opacity-70 p-6 rounded-2xl shadow-lg flex flex-col items-center text-center w-full h-full">
-                    <img src="Smart Wifi Led.png" alt="Extensión de luces LED inteligente conexión Wi-Fi" class="rounded-lg mb-4 w-full max-w-[200px] h-auto">
-                    <h3 class="text-2xl font-semibold mb-2">Extensión de luces LED inteligente - Conexión Wi-Fi</h3>
-                    <p class="text-gray-200 mb-4">Crea ambientes mágicos con la iluminación perfecta, desde donde estés.</p>
-                    <p class="text-3xl font-bold text-purple-300 mb-4">Consultar disponibilidad</p>
-                    <div class="flex flex-col sm:flex-row gap-4 w-full">
-                        <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="addToCart({id: 'prod4', name: 'Extensión de luces LED inteligente conexión Wi-Fi', price: 0})">
-                            <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                        </button>
-                        <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod4', name: 'Extensión de luces LED inteligente conexión Wi-Fi', price: 0})">
-                            <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
-                        </button>
+                <!-- Product Card 4 -->
+                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
+                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
+                        <img src="Smart Wifi Led.png" alt="Extensión LED" class="rounded-lg mb-4 w-40 h-40 object-contain">
+                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Extensión de luces LED Wi-Fi</h3>
+                        <p class="text-gray-200 text-sm md:text-base mb-4">Crea ambientes mágicos con la iluminación perfecta, desde donde estés.</p>
+                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">Consultar disponibilidad</p>
+                        <div class="flex flex-col space-y-2 w-full">
+                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod4', name: 'Extensión de luces LED Wi-Fi', price: 0})">
+                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
+                            </button>
+                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod4', name: 'Extensión de luces LED Wi-Fi', price: 0})">
+                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Product Card 5 -->
-            <div class="carousel-item min-w-[300px] md:min-w-[400px] lg:min-w-[450px] px-4">
-                <div class="bg-purple-800 bg-opacity-70 p-6 rounded-2xl shadow-lg flex flex-col items-center text-center w-full h-full">
-                    <img src="Smart Bulb.png" alt="Foco inteligente wirelesszone controlada por app" class="rounded-lg mb-4 w-full max-w-[200px] h-auto">
-                    <h3 class="text-2xl font-semibold mb-2">Foco inteligente wirelesszone controlada por app</h3>
-                    <p class="text-gray-200 mb-4">Se puede controlar la smartlife app, compatible con red wifi 2.4, control de temperatura y color, luz RGB y de alta duración.</p>
-                    <p class="text-3xl font-bold text-purple-300 mb-4">Consultar disponibilidad</p>
-                    <div class="flex flex-col sm:flex-row gap-4 w-full">
-                        <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="addToCart({id: 'prod5', name: 'Foco inteligente wirelesszone controlada por app', price: 0})">
-                            <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                        </button>
-                        <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod5', name: 'Foco inteligente wirelesszone controlada por app', price: 0})">
-                            <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
-                        </button>
+                <!-- Product Card 5 -->
+                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
+                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
+                        <img src="Smart Bulb.png" alt="Foco Inteligente" class="rounded-lg mb-4 w-40 h-40 object-contain">
+                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Foco inteligente wirelesszone</h3>
+                        <p class="text-gray-200 text-sm md:text-base mb-4">Control por app, compatible con wifi 2.4, luz RGB y de alta duración.</p>
+                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">Consultar disponibilidad</p>
+                        <div class="flex flex-col space-y-2 w-full">
+                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod5', name: 'Foco inteligente wirelesszone', price: 0})">
+                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
+                            </button>
+                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod5', name: 'Foco inteligente wirelesszone', price: 0})">
+                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Product Card 6 -->
-            <div class="carousel-item min-w-[300px] md:min-w-[400px] lg:min-w-[450px] px-4">
-                <div class="bg-purple-800 bg-opacity-70 p-6 rounded-2xl shadow-lg flex flex-col items-center text-center w-full h-full">
-                    <img src="image.png" alt="Cargador Inalámbrico" class="rounded-lg mb-4 w-full max-w-[200px] h-auto">
-                    <h3 class="text-2xl font-semibold mb-2">Cargador Inalámbrico</h3>
-                    <p class="text-gray-200 mb-4">Cargador inalámbrico rápido YN-101 de 15 W con indicador LED, minipaleta de carga delgada.</p>
-                    <p class="text-3xl font-bold text-purple-300 mb-4">$12.00</p>
-                    <div class="flex flex-col sm:flex-row gap-4 w-full">
-                        <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="addToCart({id: 'prod6', name: 'Cargador Inalámbrico', price: 12.00})">
-                            <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
-                        </button>
-                        <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full w-full sm:w-1/2 flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod6', name: 'Cargador Inalámbrico', price: 12.00})">
-                            <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
-                        </button>
+                <!-- Product Card 6 -->
+                <div class="carousel-item w-72 md:w-80 flex-shrink-0">
+                    <div class="bg-purple-800 bg-opacity-70 p-5 rounded-2xl shadow-lg flex flex-col items-center text-center h-full">
+                        <img src="image.png" alt="Cargador Inalámbrico" class="rounded-lg mb-4 w-40 h-40 object-contain">
+                        <h3 class="text-xl md:text-2xl font-semibold mb-2">Cargador Inalámbrico</h3>
+                        <p class="text-gray-200 text-sm md:text-base mb-4">Cargador inalámbrico rápido de 15W con indicador LED.</p>
+                        <p class="text-2xl md:text-3xl font-bold text-purple-300 mb-4">$12.00</p>
+                        <div class="flex flex-col space-y-2 w-full">
+                            <button class="btn-animated bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="addToCart({id: 'prod6', name: 'Cargador Inalámbrico', price: 12.00})">
+                                <i class="fas fa-cart-plus mr-2"></i><span>Añadir al Carrito</span>
+                            </button>
+                            <button class="btn-animated bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center" onclick="orderViaWhatsApp({id: 'prod6', name: 'Cargador Inalámbrico', price: 12.00})">
+                                <i class="fab fa-whatsapp mr-2"></i><span>Pedir por WhatsApp</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <button class="carousel-button prev absolute left-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-4 rounded-full hover:bg-opacity-70 z-10" onclick="moveCarousel('all-products-carousel', -1)">&#10094;</button>
-        <button class="carousel-button next absolute right-0 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-4 rounded-full hover:bg-opacity-70 z-10" onclick="moveCarousel('all-products-carousel', 1)">&#10095;</button>
+
+        <button class="carousel-button next hidden md:block absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-70 z-10 transition-all" onclick="moveCarousel('all-products-carousel', 1)">
+            &#10095;
+        </button>
     </div>
-    <div class="text-center mt-8">
-        <button class="btn-animated bg-purple-700 hover:bg-purple-800 text-white font-bold py-4 px-8 rounded-full text-xl" onclick="openCartModal()">
+
+    <div class="text-center mt-6 md:mt-8">
+        <button class="btn-animated bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-6 md:py-4 md:px-8 rounded-full text-lg md:text-xl" onclick="openCartModal()">
             <i class="fas fa-shopping-cart mr-2"></i><span>Ver Carrito (<span id="cart-count">0</span>)</span>
         </button>
     </div>
 </section>
-
-<style>
-    .carousel-container {
-        position: relative;
-    }
-    
-    .carousel-wrapper {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        padding: 20px 0;
-    }
-    
-    .carousel-item {
-        scroll-snap-align: start;
-        flex: 0 0 auto;
-    }
-    
-    .carousel-wrapper::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .carousel-button {
-        display: none;
-    }
-    
-    @media (min-width: 768px) {
-        .carousel-button {
-            display: block;
-        }
-        
-        .carousel-wrapper {
-            overflow-x: hidden;
-        }
-    }
-</style>
-
-<script>
-    function moveCarousel(carouselId, direction) {
-        const carousel = document.getElementById(carouselId);
-        const itemWidth = carousel.querySelector('.carousel-item').offsetWidth + 32; // 32px for padding
-        const scrollAmount = itemWidth * direction;
-        
-        carousel.scrollBy({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
-    }
-</script>
 
         <!-- Services Section -->
         <section id="servicios" class="my-12 bg-white bg-opacity-20 backdrop-blur-sm p-8 rounded-3xl shadow-xl">
@@ -568,19 +525,20 @@
             }
         }
 
-        function moveCarousel(carouselId, direction) {
-            const carouselWrapper = document.getElementById(carouselId);
-            const carouselItems = carouselWrapper.querySelectorAll('.carousel-item');
-            const totalSlides = carouselItems.length;
-
-            carouselStates[carouselId] = (carouselStates[carouselId] + direction + totalSlides) % totalSlides;
-            carouselWrapper.style.transform = `translateX(-${carouselStates[carouselId] * 100}%)`;
-        }
-
-        // Initialize only the products carousel on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeCarousel('all-products-carousel');
+       function moveCarousel(carouselId, direction) {
+        const carousel = document.getElementById(carouselId);
+        const innerCarousel = carousel.querySelector('.inner-carousel');
+        const item = carousel.querySelector('.carousel-item');
+        const itemWidth = item.offsetWidth + 12; // item width + margin
+        
+        // Calculate scroll amount (show 1 item on mobile, 2-3 on desktop)
+        const scrollAmount = itemWidth * direction * (window.innerWidth < 768 ? 1 : Math.max(1, Math.floor(window.innerWidth / itemWidth) - 1));
+        
+        carousel.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
         });
+    });
 
         // Shopping Cart Logic
         let cart = [];
