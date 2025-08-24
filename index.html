@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-     <!-- Favicon estándar -->
-<link rel="icon" href="logo 1x1.png" type="image/x-icon">
-<link rel="shortcut icon" href="logo 1x1.png" type="image/x-icon">
-
-<!-- Para navegadores modernos (PNG/SVG) -->
-<link rel="icon" href="logo 1x1.png" type="image/png">
-<link rel="icon" href="logo 1x1.svg" type="image/svg+xml">
-
-<!-- Para Apple (iOS) -->
-<link rel="apple-touch-icon" href="logo 1x1.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEVERUNTECH | Productos y Servicios Tecnológicos</title>
@@ -213,6 +203,13 @@
             color: #FFD700;
         }
         
+        .admin-panel {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
         @media (max-width: 768px) {
             .hero-text {
                 font-size: 1.5rem;
@@ -359,7 +356,7 @@
                         <span>Actualización de hardware</span>
                     </li>
                     <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                        <i class="fas fa-check text-secondary mr=2 mt-1"></i>
                         <span>Diagnóstico completo</span>
                     </li>
                 </ul>
@@ -495,12 +492,11 @@
                             </button>
                         </div>
                     </div>
-                    
-                  
                 </div>
             </div>
         </div>
     </section>
+    
     <!-- Contact & Map Section -->
     <section id="contact" class="py-16 px-4">
         <div class="container mx-auto">
@@ -539,8 +535,8 @@
                     </div>
                     <div class="mt-6">
                         <button onclick="window.open('https://wa.me/593982289931', '_blank')" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold flex items-center transition duration-300">
-    <i class="fab fa-whatsapp mr-2"></i> Chatear ahora por WhatsApp
-</button>
+                            <i class="fab fa-whatsapp mr-2"></i> Chatear ahora por WhatsApp
+                        </button>
                     </div>
                 </div>
             </div>
@@ -587,6 +583,22 @@
                             Enviar Opinión
                         </button>
                     </form>
+
+                    <!-- Panel de administración (oculto inicialmente) -->
+                    <div id="admin-panel" class="admin-panel mt-6 hidden">
+                        <h4 class="text-lg font-bold mb-3">Panel de Administración</h4>
+                        <div class="flex space-x-2">
+                            <button id="download-excel" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm">
+                                <i class="fas fa-download mr-1"></i> Descargar Excel
+                            </button>
+                            <button id="refresh-opinions" class="bg-secondary hover:bg-purple-700 text-white px-3 py-1 rounded text-sm">
+                                <i class="fas fa-sync-alt mr-1"></i> Actualizar
+                            </button>
+                        </div>
+                        <div class="mt-3 text-xs">
+                            <p>Para acceder al panel: Haz clic 5 veces en el título "Opiniones de Nuestros Clientes"</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Información adicional -->
@@ -651,6 +663,7 @@
     </footer>
 
     <script>
+        // ===== CONFIGURACIÓN INICIAL =====
         // Detectar si el menú cabe en el espacio disponible
         function checkMenuFit() {
             const nav = document.querySelector('nav');
@@ -685,19 +698,7 @@
         window.addEventListener('load', checkMenuFit);
         window.addEventListener('resize', checkMenuFit);
         
-        // Toggle mobile menu
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuToggle.addEventListener('click', function() {
-            mobileMenu.classList.toggle('open');
-        });
-        
-        function closeMobileMenu() {
-            mobileMenu.classList.remove('open');
-        }
-        
-        // Cart functionality
+        // ===== FUNCIONALIDAD DEL CARRITO =====
         let cart = [];
         
         // Función para alternar el carrito móvil
@@ -917,7 +918,13 @@
             el.style.transform = 'translateY(30px)';
         });
         
-        // Testimonials functionality
+        // ===== SISTEMA DE OPINIONES CON EXCEL =====
+        // Configuración de SheetDB (API para Excel)
+        const SHEETDB_API_URL = 'https://sheetdb.io/api/v1/2l4x3q8t2q46u';
+        
+        // Contador para el panel de administración
+        let adminClickCount = 0;
+        
         document.addEventListener('DOMContentLoaded', function() {
             // Cargar opiniones existentes
             loadTestimonials();
@@ -927,6 +934,13 @@
             
             // Manejar envío del formulario
             document.getElementById('testimonial-form').addEventListener('submit', handleTestimonialSubmit);
+            
+            // Configurar el panel de administración
+            setupAdminPanel();
+            
+            // Configurar botones de administración
+            document.getElementById('download-excel').addEventListener('click', downloadExcel);
+            document.getElementById('refresh-opinions').addEventListener('click', loadTestimonials);
         });
         
         function setupStarRating() {
@@ -964,6 +978,21 @@
             });
         }
         
+        function setupAdminPanel() {
+            // Acceso al panel de administración con 5 clics en el título
+            const title = document.querySelector('#testimonials h2');
+            title.addEventListener('click', function() {
+                adminClickCount++;
+                if (adminClickCount >= 5) {
+                    document.getElementById('admin-panel').classList.remove('hidden');
+                    adminClickCount = 0;
+                    setTimeout(() => {
+                        document.getElementById('admin-panel').classList.add('hidden');
+                    }, 10000);
+                }
+            });
+        }
+        
         function handleTestimonialSubmit(e) {
             e.preventDefault();
             
@@ -979,24 +1008,43 @@
             
             // Crear objeto con los datos del testimonio
             const testimonial = {
+                id: Date.now(),
                 name,
                 email,
                 rating: parseInt(rating),
                 message,
-                date: new Date().toISOString()
+                date: new Date().toISOString(),
+                approved: false
             };
             
-            // Enviar a la API (usando JSONPlaceholder para demostración)
-            fetch('https://jsonplaceholder.typicode.com/posts', {
+            // Guardar en SheetDB (Excel en la nube)
+            saveTestimonialToSheetDB(testimonial);
+        }
+        
+        function saveTestimonialToSheetDB(testimonial) {
+            fetch(SHEETDB_API_URL, {
                 method: 'POST',
-                body: JSON.stringify(testimonial),
                 headers: {
-                    'Content-type': 'application/json; charset=UTF-8',
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 },
+                body: JSON.stringify({
+                    data: [
+                        {
+                            'id': testimonial.id,
+                            'nombre': testimonial.name,
+                            'email': testimonial.email,
+                            'calificacion': testimonial.rating,
+                            'mensaje': testimonial.message,
+                            'fecha': testimonial.date,
+                            'aprobado': testimonial.approved ? 'Sí' : 'No'
+                        }
+                    ]
+                })
             })
             .then(response => response.json())
             .then(data => {
-                // Simular respuesta exitosa
+                // Mostrar mensaje de éxito
                 alert('¡Gracias por tu opinión! Será revisada y publicada pronto.');
                 document.getElementById('testimonial-form').reset();
                 document.getElementById('rating').value = "0";
@@ -1012,35 +1060,86 @@
             .catch(error => {
                 console.error('Error:', error);
                 alert('Hubo un error al enviar tu opinión. Por favor intenta nuevamente.');
+                
+                // Guardar en localStorage como respaldo
+                saveTestimonialToLocalStorage(testimonial);
             });
         }
         
+        function saveTestimonialToLocalStorage(testimonial) {
+            // Obtener testimonios existentes
+            let testimonials = JSON.parse(localStorage.getItem('severuntech_testimonials')) || [];
+            
+            // Agregar el nuevo testimonio
+            testimonials.push(testimonial);
+            
+            // Guardar en localStorage
+            localStorage.setItem('severuntech_testimonials', JSON.stringify(testimonials));
+        }
+        
         function loadTestimonials() {
-            // Obtener testimonios de la API (usando JSONPlaceholder para demostración)
-            fetch('https://jsonplaceholder.typicode.com/comments?_limit=6')
+            // Primero intentar cargar desde SheetDB
+            fetch(SHEETDB_API_URL)
                 .then(response => response.json())
-                .then(comments => {
-                    // Transformar datos de la API a nuestro formato
-                    const testimonials = comments.map(comment => ({
-                        name: comment.name,
-                        email: comment.email,
-                        rating: Math.floor(Math.random() * 5) + 1, // Rating aleatorio entre 1-5
-                        message: comment.body,
-                        date: new Date().toISOString()
-                    }));
+                .then(data => {
+                    // Filtrar solo los aprobados
+                    const approvedTestimonials = data.filter(t => t.aprobado === 'Sí');
                     
-                    displayTestimonials(testimonials);
+                    if (approvedTestimonials.length === 0) {
+                        // Si no hay aprobados, cargar desde localStorage
+                        loadFromLocalStorage();
+                    } else {
+                        displayTestimonials(approvedTestimonials);
+                    }
                 })
                 .catch(error => {
-                    console.error('Error cargando testimonios:', error);
-                    // Mostrar mensaje de error
-                    document.getElementById('testimonials-container').innerHTML = `
-                        <div class="text-center py-8 col-span-full">
-                            <i class="fas fa-exclamation-triangle text-3xl text-red-400"></i>
-                            <p class="mt-2">Error cargando las opiniones. Por favor intenta más tarde.</p>
-                        </div>
-                    `;
+                    console.error('Error cargando desde SheetDB:', error);
+                    // Si hay error, cargar desde localStorage
+                    loadFromLocalStorage();
                 });
+        }
+        
+        function loadFromLocalStorage() {
+            const testimonials = JSON.parse(localStorage.getItem('severuntech_testimonials')) || [];
+            
+            // Filtrar solo los aprobados para mostrar
+            const approvedTestimonials = testimonials.filter(t => t.approved);
+            
+            // Si no hay testimonios aprobados, mostrar algunos de ejemplo
+            if (approvedTestimonials.length === 0) {
+                displayExampleTestimonials();
+            } else {
+                displayTestimonials(approvedTestimonials);
+            }
+        }
+        
+        function displayExampleTestimonials() {
+            // Mostrar testimonios de ejemplo si no hay testimonios reales
+            const exampleTestimonials = [
+                {
+                    id: 1,
+                    nombre: "Carlos Rodríguez",
+                    calificacion: 5,
+                    mensaje: "Excelente servicio. Repararon mi laptop en menos de 24 horas y quedó como nueva. ¡Totalmente recomendados!",
+                    fecha: new Date().toISOString()
+                },
+                {
+                    id: 2,
+                    nombre: "María González",
+                    calificacion: 4,
+                    mensaje: "Compré el disco sólido y la diferencia de velocidad es increíble. Buen precio y atención de calidad.",
+                    fecha: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 3,
+                    nombre: "Juan Pérez",
+                    calificacion: 5,
+                    mensaje: "Transformaron mi casa en un hogar inteligente. La instalación fue rápida y ahora controlo todo desde mi teléfono.",
+                    fecha: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
+                }
+            ];
+            
+            displayTestimonials(exampleTestimonials);
         }
         
         function displayTestimonials(testimonials) {
@@ -1056,27 +1155,52 @@
                 return;
             }
             
+            // Ordenar testimonios por fecha (más recientes primero)
+            testimonials.sort((a, b) => new Date(b.fecha || b.date) - new Date(a.fecha || a.date));
+            
             container.innerHTML = testimonials.map(testimonial => `
                 <div class="testimonial-card rounded-xl p-6">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white font-bold mr-3">
-                            ${testimonial.name.charAt(0).toUpperCase()}
+                            ${(testimonial.nombre || testimonial.name).charAt(0).toUpperCase()}
                         </div>
                         <div>
-                            <h4 class="font-semibold">${testimonial.name}</h4>
+                            <h4 class="font-semibold">${testimonial.nombre || testimonial.name}</h4>
                             <div class="star-rating text-sm">
-                                ${'★'.repeat(testimonial.rating)}${'☆'.repeat(5 - testimonial.rating)}
+                                ${'★'.repeat(testimonial.calificacion || testimonial.rating)}${'☆'.repeat(5 - (testimonial.calificacion || testimonial.rating))}
                             </div>
                         </div>
                     </div>
-                    <p class="text-sm italic">"${testimonial.message}"</p>
+                    <p class="text-sm italic">"${testimonial.mensaje || testimonial.message}"</p>
                     <div class="mt-4 text-xs text-gray-300">
-                        ${new Date(testimonial.date).toLocaleDateString('es-ES')}
+                        ${new Date(testimonial.fecha || testimonial.date).toLocaleDateString('es-ES')}
                     </div>
                 </div>
             `).join('');
         }
+        
+        function downloadExcel() {
+            // Crear un enlace temporal para descargar el Excel
+            const link = document.createElement('a');
+            link.href = `${SHEETDB_API_URL}?download=1`;
+            link.target = '_blank';
+            link.download = 'opiniones_clientes_severuntech.xlsx';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Toggle mobile menu
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileMenu.classList.toggle('open');
+        });
+        
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+        }
     </script>
-    <script defer src="https://www.vercel-analytics.com/v1/script.js"></script>
 </body>
 </html>
