@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-     <!-- Favicon estándar -->
-<link rel="icon" href="logo 1x1.png" type="image/x-icon">
-<link rel="shortcut icon" href="logo 1x1.png" type="image/x-icon">
-
-<!-- Para navegadores modernos (PNG/SVG) -->
-<link rel="icon" href="logo 1x1.png" type="image/png">
-<link rel="icon" href="logo 1x1.svg" type="image/svg+xml">
-
-<!-- Para Apple (iOS) -->
-<link rel="apple-touch-icon" href="logo 1x1.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEVERUNTECH | Productos y Servicios Tecnológicos</title>
@@ -197,6 +187,22 @@
             pointer-events: all;
         }
         
+        /* Estilos para la sección de opiniones */
+        .testimonial-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .star-rating {
+            color: #FFD700;
+        }
+        
         @media (max-width: 768px) {
             .hero-text {
                 font-size: 1.5rem;
@@ -236,6 +242,7 @@
                 <div class="nav-links">
                     <a href="#products" class="hover:text-gray-300 transition">Productos</a>
                     <a href="#contact" class="hover:text-gray-300 transition">Contacto</a>
+                    <a href="#testimonials" class="hover:text-gray-300 transition">Opiniones</a>
                     <div class="relative">
                         <button id="cart-toggle" class="relative">
                             <i class="fas fa-shopping-cart text-xl"></i>
@@ -275,6 +282,7 @@
                 <div class="mobile-nav-links">
                     <a href="#products" class="hover:text-gray-300 transition py-2" onclick="closeMobileMenu()">Productos</a>
                     <a href="#contact" class="hover:text-gray-300 transition py-2" onclick="closeMobileMenu()">Contacto</a>
+                    <a href="#testimonials" class="hover:text-gray-300 transition py-2" onclick="closeMobileMenu()">Opiniones</a>
                 </div>
             </div>
         </nav>
@@ -523,6 +531,81 @@
                         <button onclick="window.open('https://wa.me/593982289931', '_blank')" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-semibold flex items-center transition duration-300">
     <i class="fab fa-whatsapp mr-2"></i> Chatear ahora por WhatsApp
 </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 px-4 bg-white bg-opacity-10">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-10 text-center">Opiniones de Nuestros Clientes</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Formulario para enviar opiniones -->
+                <div class="glass-effect p-6 rounded-xl">
+                    <h3 class="text-2xl font-bold mb-4">Comparte tu experiencia</h3>
+                    <form id="testimonial-form" class="space-y-4">
+                        <div>
+                            <label for="name" class="block mb-1">Nombre</label>
+                            <input type="text" id="name" required 
+                                   class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-secondary">
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-1">Email</label>
+                            <input type="email" id="email" required 
+                                   class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-secondary">
+                        </div>
+                        <div>
+                            <label for="rating" class="block mb-1">Calificación</label>
+                            <div class="flex space-x-1 mb-2">
+                                <span class="star-rating text-xl cursor-pointer" data-rating="1">☆</span>
+                                <span class="star-rating text-xl cursor-pointer" data-rating="2">☆</span>
+                                <span class="star-rating text-xl cursor-pointer" data-rating="3">☆</span>
+                                <span class="star-rating text-xl cursor-pointer" data-rating="4">☆</span>
+                                <span class="star-rating text-xl cursor-pointer" data-rating="5">☆</span>
+                            </div>
+                            <input type="hidden" id="rating" value="0" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block mb-1">Tu opinión</label>
+                            <textarea id="message" rows="4" required 
+                                      class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-secondary"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-primary hover:bg-purple-800 text-white py-2 rounded-lg transition duration-300">
+                            Enviar Opinión
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Información adicional -->
+                <div class="glass-effect p-6 rounded-xl flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-4">Tu opinión es importante</h3>
+                    <p class="mb-4">En SEVERUNTECH valoramos mucho la experiencia de nuestros clientes. Comparte tus comentarios sobre nuestros productos y servicios para ayudarnos a mejorar.</p>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-star text-yellow-400 mr-2"></i>
+                        <p>Todas las opiniones son revisadas antes de publicarse</p>
+                    </div>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-shield-alt text-secondary mr-2"></i>
+                        <p>Protegemos tu privacidad - nunca compartiremos tu información</p>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-comments text-accent mr-2"></i>
+                        <p>Respondemos a todas las opiniones en 24-48 horas</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lista de opiniones -->
+            <div>
+                <h3 class="text-2xl font-bold mb-6 text-center">Opiniones recientes</h3>
+                <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Las opiniones se cargarán dinámicamente con JavaScript -->
+                    <div class="text-center py-8">
+                        <i class="fas fa-spinner fa-spin text-3xl text-secondary"></i>
+                        <p class="mt-2">Cargando opiniones...</p>
                     </div>
                 </div>
             </div>
@@ -823,6 +906,166 @@
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
         });
+        
+        // Testimonials functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar opiniones existentes
+            loadTestimonials();
+            
+            // Configurar estrellas de calificación
+            setupStarRating();
+            
+            // Manejar envío del formulario
+            document.getElementById('testimonial-form').addEventListener('submit', handleTestimonialSubmit);
+        });
+        
+        function setupStarRating() {
+            const stars = document.querySelectorAll('.star-rating');
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    document.getElementById('rating').value = rating;
+                    
+                    // Actualizar visualización de estrellas
+                    stars.forEach(s => {
+                        const starRating = parseInt(s.getAttribute('data-rating'));
+                        s.textContent = starRating <= rating ? '★' : '☆';
+                    });
+                });
+                
+                star.addEventListener('mouseover', function() {
+                    const hoverRating = parseInt(this.getAttribute('data-rating'));
+                    
+                    stars.forEach(s => {
+                        const starRating = parseInt(s.getAttribute('data-rating'));
+                        s.textContent = starRating <= hoverRating ? '★' : '☆';
+                    });
+                });
+                
+                star.addEventListener('mouseout', function() {
+                    const currentRating = parseInt(document.getElementById('rating').value);
+                    
+                    stars.forEach(s => {
+                        const starRating = parseInt(s.getAttribute('data-rating'));
+                        s.textContent = starRating <= currentRating ? '★' : '☆';
+                    });
+                });
+            });
+        }
+        
+        function handleTestimonialSubmit(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const rating = document.getElementById('rating').value;
+            const message = document.getElementById('message').value;
+            
+            if (rating === "0") {
+                alert('Por favor selecciona una calificación');
+                return;
+            }
+            
+            // Crear objeto con los datos del testimonio
+            const testimonial = {
+                name,
+                email,
+                rating: parseInt(rating),
+                message,
+                date: new Date().toISOString()
+            };
+            
+            // Enviar a la API (usando JSONPlaceholder para demostración)
+            fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                body: JSON.stringify(testimonial),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Simular respuesta exitosa
+                alert('¡Gracias por tu opinión! Será revisada y publicada pronto.');
+                document.getElementById('testimonial-form').reset();
+                document.getElementById('rating').value = "0";
+                
+                // Resetear estrellas
+                document.querySelectorAll('.star-rating').forEach(star => {
+                    star.textContent = '☆';
+                });
+                
+                // Recargar testimonios
+                loadTestimonials();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al enviar tu opinión. Por favor intenta nuevamente.');
+            });
+        }
+        
+        function loadTestimonials() {
+            // Obtener testimonios de la API (usando JSONPlaceholder para demostración)
+            fetch('https://jsonplaceholder.typicode.com/comments?_limit=6')
+                .then(response => response.json())
+                .then(comments => {
+                    // Transformar datos de la API a nuestro formato
+                    const testimonials = comments.map(comment => ({
+                        name: comment.name,
+                        email: comment.email,
+                        rating: Math.floor(Math.random() * 5) + 1, // Rating aleatorio entre 1-5
+                        message: comment.body,
+                        date: new Date().toISOString()
+                    }));
+                    
+                    displayTestimonials(testimonials);
+                })
+                .catch(error => {
+                    console.error('Error cargando testimonios:', error);
+                    // Mostrar mensaje de error
+                    document.getElementById('testimonials-container').innerHTML = `
+                        <div class="text-center py-8 col-span-full">
+                            <i class="fas fa-exclamation-triangle text-3xl text-red-400"></i>
+                            <p class="mt-2">Error cargando las opiniones. Por favor intenta más tarde.</p>
+                        </div>
+                    `;
+                });
+        }
+        
+        function displayTestimonials(testimonials) {
+            const container = document.getElementById('testimonials-container');
+            
+            if (testimonials.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 col-span-full">
+                        <i class="fas fa-comment-slash text-3xl text-secondary"></i>
+                        <p class="mt-2">Aún no hay opiniones. ¡Sé el primero en comentar!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = testimonials.map(testimonial => `
+                <div class="testimonial-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white font-bold mr-3">
+                            ${testimonial.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">${testimonial.name}</h4>
+                            <div class="star-rating text-sm">
+                                ${'★'.repeat(testimonial.rating)}${'☆'.repeat(5 - testimonial.rating)}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm italic">"${testimonial.message}"</p>
+                    <div class="mt-4 text-xs text-gray-300">
+                        ${new Date(testimonial.date).toLocaleDateString('es-ES')}
+                    </div>
+                </div>
+            `).join('');
+        }
     </script>
     <script defer src="https://www.vercel-analytics.com/v1/script.js"></script>
 </body>
