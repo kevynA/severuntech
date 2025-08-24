@@ -214,6 +214,28 @@
             color: #FFD700;
         }
         
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            background: #4CAF50;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: #F44336;
+        }
+        
         @media (max-width: 768px) {
             .hero-text {
                 font-size: 1.5rem;
@@ -298,6 +320,9 @@
             </div>
         </nav>
     </header>
+
+    <!-- Notificación -->
+    <div id="notification" class="notification"></div>
 
     <!-- Carrito móvil -->
     <div id="mobile-cart-backdrop"></div>
@@ -651,6 +676,10 @@
     </footer>
 
     <script>
+        // ===== CONFIGURACIÓN DE SHEETDB =====
+        // Reemplaza esta URL con la URL de tu API de SheetDB
+        const SHEETDB_API_URL = 'https://sheetdb.io/api/v1/g8mnxeu3et3kz';
+        
         // ===== CONFIGURACIÓN INICIAL =====
         // Detectar si el menú cabe en el espacio disponible
         function checkMenuFit() {
@@ -683,7 +712,20 @@
         }
         
         // Ejecutar al cargar y al redimensionar
-        window.addEventListener('load', checkMenuFit);
+        window.addEventListener('load', function() {
+            checkMenuFit();
+            // Cargar opiniones existentes
+            loadTestimonials();
+            
+            // Configurar estrellas de calificación
+            setupStarRating();
+            
+            // Manejar envío del formulario
+            const testimonialForm = document.getElementById('testimonial-form');
+            if (testimonialForm) {
+                testimonialForm.addEventListener('submit', handleTestimonialSubmit);
+            }
+        });
         window.addEventListener('resize', checkMenuFit);
         
         // ===== FUNCIONALIDAD DEL CARRITO =====
@@ -918,77 +960,7 @@
             mobileMenu.classList.remove('open');
         }
 
-        // ===== SISTEMA DE OPINIONES CORREGIDO =====
-        // Datos de ejemplo basados en tus necesidades
-        const sampleTestimonials = [
-            {
-                id: '1756068010464',
-                nombre: 'Kevin Ayala',
-                email: 'kevyn100478401@gmail.com',
-                calificacion: '5',
-                mensaje: 'Excelente servicio, repararon mi laptop en menos de 24 horas y quedó como nueva. ¡Totalmente recomendado!',
-                fecha: '2025-08-24T20:40:10.464Z',
-                aprobado: 'Sí'
-            },
-            {
-                id: '1756069341421',
-                nombre: 'Kevin Ayala',
-                email: 'kevyn100478401@gmail.com',
-                calificacion: '5',
-                mensaje: 'Excelente atención y servicio de calidad',
-                fecha: '2025-08-24T21:02:21.421Z',
-                aprobado: 'Sí'
-            },
-            {
-                id: '1756069750554',
-                nombre: 'Kevin',
-                email: 'kevyn100478401@gmail.com',
-                calificacion: '2',
-                mensaje: 'Buen Servicio',
-                fecha: '2025-08-24T21:09:10.566Z',
-                aprobado: 'Sí'
-            },
-            {
-                id: '1',
-                nombre: 'Carlos Rodríguez',
-                calificacion: '5',
-                mensaje: 'Excelente servicio. Repararon mi laptop en menos de 24 horas y quedó como nueva. ¡Totalmente recomendados!',
-                fecha: '2025-01-15T10:30:00.000Z',
-                aprobado: 'Sí'
-            },
-            {
-                id: '2',
-                nombre: 'María González',
-                calificacion: '4',
-                mensaje: 'Compré el disco sólido y la diferencia de velocidad es increíble. Buen precio y atención de calidad.',
-                fecha: '2025-01-10T14:22:00.000Z',
-                aprobado: 'Sí'
-            },
-            {
-                id: '3',
-                nombre: 'Juan Pérez',
-                calificacion: '5',
-                mensaje: 'Transformaron mi casa en un hogar inteligente. La instalación fue rápida y ahora controlo todo desde mi teléfono.',
-                fecha: '2025-01-05T09:15:00.000Z',
-                aprobado: 'Sí'
-            }
-        ];
-
-        // Configuración inicial cuando el DOM está listo
-        document.addEventListener('DOMContentLoaded', function() {
-            // Cargar opiniones existentes
-            loadTestimonials();
-            
-            // Configurar estrellas de calificación
-            setupStarRating();
-            
-            // Manejar envío del formulario
-            const testimonialForm = document.getElementById('testimonial-form');
-            if (testimonialForm) {
-                testimonialForm.addEventListener('submit', handleTestimonialSubmit);
-            }
-        });
-
+        // ===== SISTEMA DE OPINIONES CON SHEETDB =====
         function setupStarRating() {
             const stars = document.querySelectorAll('.star-rating');
             
@@ -1003,7 +975,7 @@
                         s.textContent = starRating <= rating ? '★' : '☆';
                     });
                 });
-
+                
                 star.addEventListener('mouseover', function() {
                     const hoverRating = parseInt(this.getAttribute('data-rating'));
                     
@@ -1033,7 +1005,7 @@
             const message = document.getElementById('message').value;
             
             if (rating === "0") {
-                alert('Por favor selecciona una calificación');
+                showNotification('Por favor selecciona una calificación', true);
                 return;
             }
             
@@ -1045,54 +1017,79 @@
                 calificacion: parseInt(rating),
                 mensaje: message,
                 fecha: new Date().toISOString(),
-                aprobado: 'No' // Por defecto no aprobado hasta revisión
+                aprobado: 'No' // Las nuevas opiniones requieren aprobación
             };
             
-            // Guardar en localStorage
-            saveTestimonialToLocalStorage(testimonial);
-            
-            // Mostrar mensaje de éxito
-            alert('¡Gracias por tu opinión! Será revisada y publicada pronto.');
-            document.getElementById('testimonial-form').reset();
-            document.getElementById('rating').value = "0";
-            
-            // Resetear estrellas
-            document.querySelectorAll('.star-rating').forEach(star => {
-                star.textContent = '☆';
-            });
-            
-            // Recargar testimonios
-            loadTestimonials();
+            // Guardar en SheetDB
+            saveTestimonialToSheetDB(testimonial);
         }
 
-        function saveTestimonialToLocalStorage(testimonial) {
-            // Obtener testimonios existentes
-            let testimonials = JSON.parse(localStorage.getItem('severuntech_testimonials')) || [];
+        function saveTestimonialToSheetDB(testimonial) {
+            showNotification('Enviando tu opinión...', false);
             
-            // Agregar el nuevo testimonio
-            testimonials.push(testimonial);
-            
-            // Guardar en localStorage
-            localStorage.setItem('severuntech_testimonials', JSON.stringify(testimonials));
+            fetch(SHEETDB_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: [testimonial]
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta de la API');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Mostrar mensaje de éxito
+                showNotification('¡Gracias por tu opinión! Será revisada y publicada pronto.');
+                document.getElementById('testimonial-form').reset();
+                document.getElementById('rating').value = "0";
+                
+                // Resetear estrellas
+                document.querySelectorAll('.star-rating').forEach(star => {
+                    star.textContent = '☆';
+                });
+                
+                // Recargar testimonios
+                loadTestimonials();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Hubo un error al enviar tu opinión. Por favor intenta nuevamente.', true);
+            });
         }
 
         function loadTestimonials() {
-            console.log('Cargando testimonios...');
-            
-            // Primero intentar cargar desde localStorage
-            const testimonials = JSON.parse(localStorage.getItem('severuntech_testimonials')) || [];
-            
-            // Si no hay testimonios en localStorage, usar los de muestra
-            if (testimonials.length === 0) {
-                console.log('No hay testimonios en localStorage, usando datos de muestra...');
-                localStorage.setItem('severuntech_testimonials', JSON.stringify(sampleTestimonials));
-                displayTestimonials(sampleTestimonials);
-            } else {
-                console.log('Testimonios desde localStorage:', testimonials);
-                // Filtrar solo los aprobados para mostrar
-                const approvedTestimonials = testimonials.filter(t => t.aprobado === 'Sí');
-                displayTestimonials(approvedTestimonials);
-            }
+            fetch(SHEETDB_API_URL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cargar desde SheetDB: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Filtrar solo los aprobados para mostrar
+                    const approvedTestimonials = data.filter(item => 
+                        item.aprobado && item.aprobado.toString().toLowerCase() === 'sí'
+                    );
+                    
+                    if (approvedTestimonials.length > 0) {
+                        displayTestimonials(approvedTestimonials);
+                    } else {
+                        // Si no hay testimonios aprobados, mostrar mensaje
+                        displayNoTestimonials();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar desde SheetDB:', error);
+                    showNotification('Error al cargar las opiniones. Intentando nuevamente...', true);
+                    // Reintentar después de 3 segundos
+                    setTimeout(loadTestimonials, 3000);
+                });
         }
 
         function displayTestimonials(testimonials) {
@@ -1104,12 +1101,7 @@
             }
             
             if (testimonials.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-8 col-span-full">
-                        <i class="fas fa-comment-slash text-3xl text-secondary"></i>
-                        <p class="mt-2">Aún no hay opiniones. ¡Sé el primero en comentar!</p>
-                    </div>
-                `;
+                displayNoTestimonials();
                 return;
             }
             
@@ -1124,21 +1116,31 @@
                 <div class="testimonial-card rounded-xl p-6">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white font-bold mr-3">
-                            ${(testimonial.nombre || testimonial.name).charAt(0).toUpperCase()}
+                            ${testimonial.nombre.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                            <h4 class="font-semibold">${testimonial.nombre || testimonial.name}</h4>
+                            <h4 class="font-semibold">${testimonial.nombre}</h4>
                             <div class="star-rating text-sm">
-                                ${'★'.repeat(parseInt(testimonial.calificacion || testimonial.rating))}${'☆'.repeat(5 - parseInt(testimonial.calificacion || testimonial.rating))}
+                                ${'★'.repeat(parseInt(testimonial.calificacion))}${'☆'.repeat(5 - parseInt(testimonial.calificacion))}
                             </div>
                         </div>
                     </div>
-                    <p class="text-sm italic">"${testimonial.mensaje || testimonial.message}"</p>
+                    <p class="text-sm italic">"${testimonial.mensaje}"</p>
                     <div class="mt-4 text-xs text-gray-300">
-                        ${formatDate(testimonial.fecha || testimonial.date)}
+                        ${formatDate(testimonial.fecha)}
                     </div>
                 </div>
             `).join('');
+        }
+
+        function displayNoTestimonials() {
+            const container = document.getElementById('testimonials-container');
+            container.innerHTML = `
+                <div class="text-center py-8 col-span-full">
+                    <i class="fas fa-comment-slash text-3xl text-secondary"></i>
+                    <p class="mt-2">Aún no hay opiniones. ¡Sé el primero en comentar!</p>
+                </div>
+            `;
         }
 
         function formatDate(dateString) {
@@ -1148,6 +1150,23 @@
                 month: 'long',
                 day: 'numeric'
             });
+        }
+
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.remove('error');
+            
+            if (isError) {
+                notification.classList.add('error');
+            }
+            
+            notification.classList.add('show');
+            
+            // Ocultar después de 5 segundos
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
         }
     </script>
 </body>
