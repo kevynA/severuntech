@@ -105,6 +105,7 @@ function handleTestimonialSubmit(e) {
         rating: parseInt(rating),
         message,
         date: new Date().toISOString(),
+        // CORRECCIÓN: Usar "aprovado" en lugar de "aprobado"
         approved: false
     };
     
@@ -128,7 +129,8 @@ function saveTestimonialToSheetDB(testimonial) {
                     'calificacion': testimonial.rating,
                     'mensaje': testimonial.message,
                     'fecha': testimonial.date,
-                    'aprobado': testimonial.approved ? 'Sí' : 'No'
+                    // CORRECCIÓN: Usar "aprovado" en lugar de "aprobado"
+                    'aprovado': testimonial.approved ? 'Sí' : 'No'
                 }
             ]
         })
@@ -187,15 +189,18 @@ function loadTestimonials() {
         .then(data => {
             console.log('Datos recibidos de SheetDB:', data);
             
-            // Filtrar solo los testimonios aprobados
+            // CORRECCIÓN: Usar "aprovado" en lugar de "aprobado"
             const approvedTestimonials = data.filter(item => 
-                item.aprobado && item.aprobado.toString().toLowerCase() === 'sí'
+                item.aprovado && item.aprovado.toString().toLowerCase() === 'sí'
             );
+            
+            console.log('Testimonios aprobados:', approvedTestimonials);
             
             if (approvedTestimonials.length > 0) {
                 displayTestimonials(approvedTestimonials);
             } else {
                 // Si no hay testimonios aprobados, intentar cargar desde localStorage
+                console.log('No hay testimonios aprobados en SheetDB, cargando desde localStorage...');
                 loadFromLocalStorage();
             }
         })
@@ -214,8 +219,10 @@ function loadFromLocalStorage() {
     
     // Si no hay testimonios aprobados, mostrar algunos de ejemplo
     if (approvedTestimonials.length === 0) {
+        console.log('No hay testimonios en localStorage, mostrando ejemplos...');
         displayExampleTestimonials();
     } else {
+        console.log('Testimonios desde localStorage:', approvedTestimonials);
         displayTestimonials(approvedTestimonials);
     }
 }
@@ -252,7 +259,10 @@ function displayExampleTestimonials() {
 function displayTestimonials(testimonials) {
     const container = document.getElementById('testimonials-container');
     
-    if (!container) return;
+    if (!container) {
+        console.error('No se encontró el contenedor de testimonios');
+        return;
+    }
     
     if (testimonials.length === 0) {
         container.innerHTML = `
