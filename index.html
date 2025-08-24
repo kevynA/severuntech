@@ -1089,26 +1089,25 @@
         }
         
         function loadTestimonials() {
-            // Primero intentar cargar desde SheetDB
-            fetch(SHEETDB_API_URL)
-                .then(response => response.json())
-                .then(data => {
-                    // Filtrar solo los aprobados
-                    const approvedTestimonials = data.filter(t => t.aprobado === 'Sí');
-                    
-                    if (approvedTestimonials.length === 0) {
-                        // Si no hay aprobados, cargar desde localStorage
-                        loadFromLocalStorage();
-                    } else {
-                        displayTestimonials(approvedTestimonials);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error cargando desde SheetDB:', error);
-                    // Si hay error, cargar desde localStorage
-                    loadFromLocalStorage();
-                });
-        }
+    console.log('Cargando testimonios desde:', SHEETDB_API_URL);
+    
+    // Primero intentar cargar desde SheetDB
+    fetch(SHEETDB_API_URL)
+        .then(response => {
+            console.log('Respuesta de SheetDB:', response.status);
+            if (!response.ok) {
+                throw new Error('Error al cargar desde SheetDB: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Datos recibidos:', data);
+            // ... el resto del código
+        })
+        .catch(error => {
+            console.error('Error completo:', error);
+        });
+}
         
         function loadFromLocalStorage() {
             const testimonials = JSON.parse(localStorage.getItem('severuntech_testimonials')) || [];
@@ -1191,15 +1190,15 @@
         }
         
         function downloadExcel() {
-            // Crear un enlace temporal para descargar el Excel
-            const link = document.createElement('a');
-            link.href = `${https://sheetdb.io/api/v1/g8mnxeu3et3kz}?download=1`;
-            link.target = '_blank';
-            link.download = 'opiniones_clientes_severuntech.xlsx';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
+    // Crear un enlace temporal para descargar el Excel
+    const link = document.createElement('a');
+    link.href = `${SHEETDB_API_URL}?download=1`;  // ← USA LA VARIABLE CORRECTA
+    link.target = '_blank';
+    link.download = 'opiniones_clientes_severuntech.xlsx';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
         
         // Toggle mobile menu
         const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
