@@ -385,7 +385,7 @@
                     <div class="relative">
                         <button id="cart-toggle" class="relative">
                             <i class="fas fa-shopping-cart text-xl"></i>
-                            
+                            <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
                         </button>
                         <div id="cart-dropdown" class="hidden absolute right-0 mt-2 w-72 bg-white text-gray-800 rounded-lg shadow-xl z-50 p-4">
                             <div id="cart-items" class="max-h-60 overflow-y-auto">
@@ -406,8 +406,8 @@
                 <div class="mobile-menu-button flex items-center space-x-4">
                     <div class="relative">
                         <button id="mobile-cart-toggle" class="relative">
-            
-                    
+                        
+                            <span id="mobile-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
                         </button>
                     </div>
                     <button id="mobile-menu-toggle" class="text-2xl">
