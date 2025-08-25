@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Título y Descripción optimizados -->
-    <title>SEVERUNTECH | Productos y Servicios Tecnológicos</title>
+    <title>SEVERUNTECH | Mantenimiento y Reparación de Equipos + Hogar Inteligente en Ibarra</title>
     <meta name="description" content="Servicio técnico especializado en Ibarra. Reparación de computadoras, mantenimiento preventivo y productos de hogar inteligente. Tecnología de fácil implementación para tu hogar.">
     
     <!-- Palabras clave (enfocadas en servicios y localidad) -->
@@ -23,7 +23,7 @@
     <link rel="canonical" href="https://severuntech.vercel.app/" />
     
     <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="SEVERUNTECH | Productos y Servicios Tecnológicos">
+    <meta property="og:title" content="SEVERUNTECH | Servicio Técnico y Hogar Inteligente en Ibarra">
     <meta property="og:description" content="Reparación de computadoras, mantenimiento preventivo y productos de hogar inteligente. En Ibarra, tecnología confiable y de fácil implementación.">
     <meta property="og:image" content="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0fdb8472-4f84-4847-8ad8-711f754ee197.png">
     <meta property="og:url" content="https://severuntech.vercel.app/">
@@ -35,7 +35,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@severuntech">
     <meta name="twitter:creator" content="@severuntech">
-    <meta name="twitter:title" content="SEVERUNTECH | Productos y Servicios Tecnológicos">
+    <meta name="twitter:title" content="SEVERUNTECH | Servicio Técnico y Hogar Inteligente">
     <meta name="twitter:description" content="Reparación de computadoras y productos de hogar inteligente en Ibarra. Tecnología confiable y de fácil implementación.">
     <meta name="twitter:image" content="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0fdb8472-4f84-4847-8ad8-711f754ee197.png">
     
@@ -231,7 +231,7 @@
             gap: 1rem;
         }
         
-        /* Estilos mejorados para el carrito en móviles */
+        /* Estilos para el carrito en móviles (CORREGIDO) */
         #cart-dropdown {
             max-height: 70vh;
             overflow-y: auto;
@@ -314,6 +314,23 @@
             background: #F44336;
         }
         
+        /* Botón de carrito flotante para móviles */
+        #floating-cart-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: #6D28D9;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        
         @media (max-width: 768px) {
             .hero-text {
                 font-size: 1.5rem;
@@ -331,10 +348,20 @@
             #cart-dropdown {
                 display: none !important;
             }
+            
+            #floating-cart-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
         
         @media (min-width: 769px) {
             .cart-dropdown-mobile {
+                display: none !important;
+            }
+            
+            #floating-cart-btn {
                 display: none !important;
             }
         }
@@ -351,6 +378,7 @@
                 
                 <!-- Menú normal -->
                 <div class="nav-links">
+                    <a href="#services" class="hover:text-gray-300 transition">Servicios</a>
                     <a href="#products" class="hover:text-gray-300 transition">Productos</a>
                     <a href="#contact" class="hover:text-gray-300 transition">Contacto</a>
                     <a href="#testimonials" class="hover:text-gray-300 transition">Opiniones</a>
@@ -391,6 +419,7 @@
             <!-- Menú móvil desplegable -->
             <div id="mobile-menu">
                 <div class="mobile-nav-links">
+                    <a href="#services" class="hover:text-gray-300 transition py-2" onclick="closeMobileMenu()">Servicios</a>
                     <a href="#products" class="hover:text-gray-300 transition py-2" onclick="closeMobileMenu()">Productos</a>
                     <a href="#contact" class="hover:text-gray-300 transition py-2" onclick="closeMobileMenu()">Contacto</a>
                     <a href="#testimonials" class="hover:text-gray-300 transition py-2" onclick="closeMobileMenu()">Opiniones</a>
@@ -398,6 +427,12 @@
             </div>
         </nav>
     </header>
+
+    <!-- Botón de carrito flotante para móviles -->
+    <button id="floating-cart-btn" class="relative">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="floating-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
+    </button>
 
     <!-- Notificación -->
     <div id="notification" class="notification"></div>
@@ -422,7 +457,7 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="relative pt-24 pb-32">
+    <section class="relative pt-24 pb-32 hero-section">
         <div class="hero-image w-full h-full absolute inset-0 overflow-hidden">
             <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0fdb8472-4f84-4847-8ad8-711f754ee197.png" alt="Vanguardia tecnológica en Ibarra: Expertos trabajando con dispositivos de última generación" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-t from-purple-900/90 via-purple-900/60 to-purple-900/20"></div>
@@ -437,104 +472,104 @@
         </div>
     </section>
  
-<!-- Services Section -->
-<section id="services" class="py-16 px-4 bg-white bg-opacity-10">
-    <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-10 text-center">Nuestros Servicios</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Servicio 1 -->
-            <div class="product-card rounded-xl p-6">
-                <div class="text-center mb-4">
-                    <i class="fas fa-laptop-code text-4xl text-secondary mb-3"></i>
-                    <h3 class="font-bold text-xl mb-2">Mantenimiento de Computadoras</h3>
-                </div>
-                <ul class="space-y-2 text-sm">
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
-                        <span>Limpieza interna y externa</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
-                        <span>Optimización de sistema operativo</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
-                        <span>Actualización de hardware</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr=2 mt-1"></i>
-                        <span>Diagnóstico completo</span>
-                    </li>
-                </ul>
-                <button onclick="window.open('https://wa.me/593982289931?text=Hola%20SEVERUNTECH!%20Estoy%20interesado%20en%20el%20servicio%20de%20Mantenimiento%20de%20Computadoras', '_blank')" 
-                        class="mt-6 w-full bg-primary hover:bg-purple-800 text-white py-2 rounded-lg transition duration-300">
-                    Solicitar servicio
-                </button>
-            </div>
+    <!-- Services Section -->
+    <section id="services" class="py-16 px-4 bg-white bg-opacity-10">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-10 text-center">Nuestros Servicios</h2>
             
-            <!-- Servicio 2 -->
-            <div class="product-card rounded-xl p-6">
-                <div class="text-center mb-4">
-                    <i class="fas fa-tools text-4xl text-secondary mb-3"></i>
-                    <h3 class="font-bold text-xl mb-2">Reparación de Equipos</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Servicio 1 -->
+                <div class="product-card rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-laptop-code text-4xl text-secondary mb-3"></i>
+                        <h3 class="font-bold text-xl mb-2">Mantenimiento de Computadoras</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                            <span>Limpieza interna y externa</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                            <span>Optimización de sistema operativo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                            <span>Actualización de hardware</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr=2 mt-1"></i>
+                            <span>Diagnóstico completo</span>
+                        </li>
+                    </ul>
+                    <button onclick="window.open('https://wa.me/593982289931?text=Hola%20SEVERUNTECH!%20Estoy%20interesado%20en%20el%20servicio%20de%20Mantenimiento%20de%20Computadoras', '_blank')" 
+                            class="mt-6 w-full bg-primary hover:bg-purple-800 text-white py-2 rounded-lg transition duration-300">
+                        Solicitar servicio
+                    </button>
                 </div>
-                <ul class="space-y-2 text-sm">
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
-                        <span>Reparación de laptops y PCs</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
-                        <span>Cambio de pantallas y componentes</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
-                        <span>Recuperación de datos</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
-                        <span>Solución a problemas de hardware/software</span>
-                    </li>
-                </ul>
-                <button onclick="window.open('https://wa.me/593982289931?text=Hola%20SEVERUNTECH!%20Estoy%20interesado%20en%20el%20servicio%20de%20Reparación%20de%20Equipos', '_blank')" 
-                        class="mt-6 w-full bg-primary hover:bg-purple-800 text-white py-2 rounded-lg transition duration-300">
-                    Solicitar servicio
-                </button>
-            </div>
-            
-            <!-- Servicio 3 -->
-            <div class="product-card rounded-xl p-6">
-                <div class="text-center mb-4">
-                    <i class="fas fa-home text-4xl text-secondary mb-3"></i>
-                    <h3 class="font-bold text-xl mb-2">Hogar Inteligente</h3>
+                
+                <!-- Servicio 2 -->
+                <div class="product-card rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-tools text-4xl text-secondary mb-3"></i>
+                        <h3 class="font-bold text-xl mb-2">Reparación de Equipos</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                            <span>Reparación de laptops y PCs</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                            <span>Cambio de pantallas y componentes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                            <span>Recuperación de datos</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                            <span>Solución a problemas de hardware/software</span>
+                        </li>
+                    </ul>
+                    <button onclick="window.open('https://wa.me/593982289931?text=Hola%20SEVERUNTECH!%20Estoy%20interesado%20en%20el%20servicio%20de%20Reparación%20de%20Equipos', '_blank')" 
+                            class="mt-6 w-full bg-primary hover:bg-purple-800 text-white py-2 rounded-lg transition duration-300">
+                        Solicitar servicio
+                    </button>
                 </div>
-                <ul class="space-y-2 text-sm">
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
-                        <span>Instalación de dispositivos inteligentes</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
-                        <span>Configuración de sistemas de automatización</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
-                        <span>Asesoría personalizada</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check text-secondary mr-2 mt-1"></i>
-                        <span>Soporte técnico continuo</span>
-                    </li>
-                </ul>
-                <button onclick="window.open('https://wa.me/593982289931?text=Hola%20SEVERUNTECH!%20Estoy%20interesado%20en%20el%20servicio%20de%20Hogar%20Inteligente', '_blank')" 
-                        class="mt-6 w-full bg-primary hover:bg-purple-800 text-white py-2 rounded-lg transition duration-300">
-                    Solicitar servicio
-                </button>
+                
+                <!-- Servicio 3 -->
+                <div class="product-card rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-home text-4xl text-secondary mb-3"></i>
+                        <h3 class="font-bold text-xl mb-2">Hogar Inteligente</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                            <span>Instalación de dispositivos inteligentes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                            <span>Configuración de sistemas de automatización</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                            <span>Asesoría personalizada</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                            <span>Soporte técnico continuo</span>
+                        </li>
+                    </ul>
+                    <button onclick="window.open('https://wa.me/593982289931?text=Hola%20SEVERUNTECH!%20Estoy%20interesado%20en%20el%20servicio%20de%20Hogar%20Inteligente', '_blank')" 
+                            class="mt-6 w-full bg-primary hover:bg-purple-800 text-white py-2 rounded-lg transition duration-300">
+                        Solicitar servicio
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Products Section -->
     <section id="products" class="py-16 px-4 bg-white bg-opacity-10">
@@ -565,7 +600,7 @@
                         <h3 class="font-bold text-lg mb-2">Tira de luz inteligente Kasa Pro</h3>
                         <p class="text-sm mb-3">Configurala mediante la aplicación Kasa Smart. Multicolor, horarios, instalación flexible y sencilla, control por voz y convinalo con otros dispositivos.</p>
                         <div class="flex justify-between items-center">
-                            <span class="font-bold">Pendiente</span>
+                            <span class="font-bold">$100</span>
                             <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Tira de luz inteligente Kasa Pro', 100)">
                                 <i class="fas fa-cart-plus mr-1"></i> Agregar
                             </button>
@@ -591,7 +626,7 @@
                             <img src="image (5).png" alt="Reproductor de streaming Roku Express" class="w-full h-40 object-cover rounded-lg">
                         </div>
                         <h3 class="font-bold text-lg mb-2">Reproductor de streaming Roku Express</h3>
-                        <p class="text-sm mb-3">Te permite transmitir películas, programas de TV, y acceder a canales y aplicaciones como Netflix, Prime Video, Disney+, YouTube, y más, directamente en tu televisor. </p>
+                        <p class="textsm mb-3">Te permite transmitir películas, programas de TV, y acceder a canales y aplicaciones como Netflix, Prime Video, Disney+, YouTube, y más, directamente en tu televisor.</p>
                         <div class="flex justify-between items-center">
                             <span class="font-bold">$55</span>
                             <button class="cart-btn bg-primary text-white px-3 py-1 rounded-full text-sm flex items-center" onclick="addToCart('Reproductor de streaming Roku Express', 55)">
@@ -819,12 +854,22 @@
         }
         
         // Eventos para el carrito móvil
-        document.getElementById('mobile-cart-toggle').addEventListener('click', toggleMobileCart);
+        document.getElementById('mobile-cart-toggle').addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMobileCart();
+        });
+        
+        document.getElementById('floating-cart-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMobileCart();
+        });
+        
         document.getElementById('mobile-cart-close').addEventListener('click', toggleMobileCart);
         document.getElementById('mobile-cart-backdrop').addEventListener('click', toggleMobileCart);
         
         // Toggle desktop cart dropdown
-        document.getElementById('cart-toggle').addEventListener('click', function() {
+        document.getElementById('cart-toggle').addEventListener('click', function(e) {
+            e.stopPropagation();
             const dropdown = document.getElementById('cart-dropdown');
             dropdown.classList.toggle('hidden');
         });
@@ -855,20 +900,12 @@
             }
             
             updateCart();
+            showNotification('Producto agregado al carrito');
             
-            // Mostrar el carrito correspondiente
+            // En dispositivos móviles, mostrar el carrito después de agregar un producto
             if (window.innerWidth <= 768) {
                 toggleMobileCart();
-            } else {
-                document.getElementById('cart-dropdown').classList.remove('hidden');
             }
-            
-            // Animation feedback
-            const btn = event.target.closest('button');
-            btn.innerHTML = `<i class="fas fa-check mr-1"></i> Agregado`;
-            setTimeout(() => {
-                btn.innerHTML = `<i class="fas fa-cart-plus mr-1"></i> Agregar`;
-            }, 1000);
         }
         
         // Update cart display
@@ -877,6 +914,7 @@
             const mobileCartItemsContainer = document.getElementById('mobile-cart-items');
             const cartCount = document.getElementById('cart-count');
             const mobileCartCount = document.getElementById('mobile-cart-count');
+            const floatingCartCount = document.getElementById('floating-cart-count');
             const cartTotal = document.getElementById('cart-total');
             const mobileCartTotal = document.getElementById('mobile-cart-total');
             
@@ -884,6 +922,7 @@
             const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
             cartCount.textContent = totalItems;
             mobileCartCount.textContent = totalItems;
+            floatingCartCount.textContent = totalItems;
             
             if (cart.length === 0) {
                 cartItemsContainer.innerHTML = '<p class="text-center py-4">Tu carrito está vacío</p>';
@@ -984,7 +1023,7 @@
         
         function checkout() {
             if (cart.length === 0) {
-                alert('Tu carrito está vacío');
+                showNotification('Tu carrito está vacío', true);
                 return;
             }
             
